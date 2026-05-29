@@ -98,8 +98,13 @@
     font-weight: 300;
   }
 
-  .main { padding: 2.5rem 1.5rem; }
+  .main {
+    padding: 2.5rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
 
+  /* Year tabs */
   .year-tabs {
     display: flex;
     gap: 0;
@@ -112,7 +117,7 @@
   }
 
   .year-tab {
-    padding: 10px 28px;
+    padding: 10px 32px;
     font-family: 'Source Sans 3', sans-serif;
     font-size: 0.875rem;
     font-weight: 400;
@@ -126,11 +131,7 @@
   }
   .year-tab:last-child { border-right: none; }
   .year-tab:hover { background: var(--teal-pale); color: var(--teal-dark); }
-  .year-tab.active {
-    background: var(--teal);
-    color: #fff;
-    font-weight: 400;
-  }
+  .year-tab.active { background: var(--teal); color: #fff; }
 
   .year-panel { display: none; }
   .year-panel.active { display: block; }
@@ -138,139 +139,108 @@
   .timeline-hint {
     font-size: 0.8rem;
     color: var(--text-light);
-    margin-bottom: 1.25rem;
-    display: flex;
-    align-items: center;
-    gap: 6px;
+    margin-bottom: 2rem;
   }
-  .timeline-hint svg { width: 14px; height: 14px; color: var(--text-light); }
 
-  .timeline-scroll {
-    overflow-x: auto;
-    padding-bottom: 1.5rem;
-    cursor: grab;
-    margin: 0 -1.5rem;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-  }
-  .timeline-scroll:active { cursor: grabbing; }
-  .timeline-scroll::-webkit-scrollbar { height: 3px; }
-  .timeline-scroll::-webkit-scrollbar-track { background: transparent; }
-  .timeline-scroll::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
-
-  .timeline-track {
+  /* Vertical timeline */
+  .timeline {
     position: relative;
-    display: flex;
-    align-items: flex-start;
-    padding: 3rem 1rem 1rem;
-    min-width: max-content;
-    gap: 0;
+    padding-left: 2.5rem;
   }
 
-  .tl-line {
+  /* The vertical line running down the left */
+  .timeline::before {
+    content: '';
     position: absolute;
-    top: calc(3rem + 14px);
-    left: 2rem;
-    right: 2rem;
-    height: 1px;
+    left: 10px;
+    top: 6px;
+    bottom: 6px;
+    width: 1px;
     background: var(--border);
   }
 
-  .tl-line-fill {
-    position: absolute;
-    top: calc(3rem + 14px);
-    left: 2rem;
-    height: 1px;
-    background: var(--teal);
-    width: 0;
-    transition: width 0.4s ease;
-  }
-
-  .event-col {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 110px;
+  /* Each event row */
+  .event-row {
     position: relative;
-    flex-shrink: 0;
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
   }
 
+  /* Dot on the vertical line */
   .event-dot {
-    width: 28px;
-    height: 28px;
+    position: absolute;
+    left: -2.5rem;
+    top: 4px;
+    width: 22px;
+    height: 22px;
     border-radius: 50%;
     background: var(--warm-white);
     border: 1.5px solid var(--border);
     cursor: pointer;
-    transition: all 0.2s ease;
-    position: relative;
-    z-index: 2;
+    transition: all 0.18s ease;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
+    z-index: 2;
   }
   .event-dot::after {
     content: '';
-    width: 8px;
-    height: 8px;
+    width: 7px;
+    height: 7px;
     border-radius: 50%;
     background: var(--border);
-    transition: all 0.2s ease;
+    transition: all 0.18s ease;
   }
-  .event-dot:hover {
-    border-color: var(--teal);
-    transform: scale(1.1);
-  }
+  .event-dot:hover { border-color: var(--teal); transform: scale(1.12); }
   .event-dot:hover::after { background: var(--teal); }
   .event-dot.visited { border-color: var(--teal); }
   .event-dot.visited::after { background: var(--teal); }
-  .event-dot.open {
-    border-color: var(--teal-dark);
-    background: var(--teal);
-    transform: scale(1.15);
-  }
+  .event-dot.open { border-color: var(--teal-dark); background: var(--teal); transform: scale(1.15); }
   .event-dot.open::after { background: #fff; }
 
+  /* Label beside the dot */
   .event-label {
-    font-size: 0.7rem;
+    font-size: 0.875rem;
     color: var(--text-mid);
-    text-align: center;
-    margin-top: 10px;
-    line-height: 1.35;
-    max-width: 96px;
     cursor: pointer;
+    line-height: 1.5;
+    padding-top: 2px;
     transition: color 0.15s;
-    font-weight: 400;
+    font-weight: 300;
+    user-select: none;
   }
-  .event-label:hover, .event-dot.open ~ .event-label { color: var(--teal-dark); }
+  .event-label:hover { color: var(--teal-dark); }
+  .event-dot.open ~ .event-body .event-label { color: var(--teal-dark); font-weight: 400; }
 
+  .event-body { flex: 1; }
+
+  /* Expandable card below the label */
   .event-card {
     display: none;
-    position: absolute;
-    top: calc(100% + 4px);
-    left: 50%;
-    transform: translateX(-50%);
-    width: 240px;
+    margin-top: 0.6rem;
     background: var(--warm-white);
     border: 1px solid var(--border);
     border-radius: 10px;
-    padding: 14px;
-    z-index: 20;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-    animation: fadeUp 0.15s ease;
+    padding: 14px 16px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    animation: fadeDown 0.15s ease;
+    max-width: 480px;
   }
   .event-card.open { display: block; }
 
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateX(-50%) translateY(4px); }
-    to { opacity: 1; transform: translateX(-50%) translateY(0); }
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
   .card-header {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     padding-bottom: 10px;
     border-bottom: 1px solid var(--border-light);
     gap: 8px;
@@ -278,7 +248,7 @@
 
   .card-title {
     font-family: 'Lora', serif;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     font-weight: 400;
     color: var(--text-dark);
     line-height: 1.35;
@@ -306,9 +276,7 @@
     font-weight: 400;
   }
 
-  .symptom-row {
-    margin-bottom: 5px;
-  }
+  .symptom-row { margin-bottom: 4px; }
 
   .symptom-trigger {
     display: flex;
@@ -336,7 +304,7 @@
   .symptom-trigger:hover .symp-dot { background: var(--teal); }
 
   .symp-name {
-    font-size: 0.78rem;
+    font-size: 0.8rem;
     color: var(--text-mid);
     line-height: 1.4;
     font-weight: 300;
@@ -381,7 +349,7 @@
   }
 
   .int-label {
-    font-size: 0.72rem;
+    font-size: 0.75rem;
     color: var(--teal-dark);
     line-height: 1.45;
     font-weight: 300;
@@ -391,7 +359,7 @@
     text-align: center;
     padding: 2.5rem 1rem;
     border-top: 1px solid var(--border);
-    margin-top: 3rem;
+    margin-top: 4rem;
     font-size: 0.8rem;
     color: var(--text-light);
     background: var(--warm-white);
@@ -406,6 +374,7 @@
     .header-name { font-size: 1rem; }
     .main { padding: 1.5rem 1rem; }
     .year-tab { padding: 9px 18px; font-size: 0.8rem; }
+    .event-card { max-width: 100%; }
   }
 </style>
 </head>
@@ -424,15 +393,12 @@
 
 <div class="hero">
   <h1>Your Therapeutic Journey</h1>
-  <p>Select any event along the timeline to explore what you might experience, and the approaches we can use together.</p>
+  <p>Select any event to explore what you might experience, and the approaches we can use together.</p>
 </div>
 
 <div class="main">
   <div class="year-tabs" id="yearTabs"></div>
-  <div class="timeline-hint">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-    Scroll to explore all events — select a dot to expand
-  </div>
+  <p class="timeline-hint">Select an event to expand symptoms, then select a symptom to reveal interventions.</p>
   <div id="yearPanels"></div>
 </div>
 
@@ -450,8 +416,8 @@ const INTERVENTIONS_PER_SYMPTOM = 3;
 function buildData() {
   const data = {};
   for (let y = 1; y <= YEARS; y++) {
-    const yearKey = `Year ${y}`;
-    data[yearKey] = [];
+    const key = `Year ${y}`;
+    data[key] = [];
     for (let e = 1; e <= EVENTS_PER_YEAR; e++) {
       const symptoms = [];
       for (let s = 1; s <= SYMPTOMS_PER_EVENT; s++) {
@@ -461,7 +427,7 @@ function buildData() {
         }
         symptoms.push({ name: `Symptom ${s}`, interventions });
       }
-      data[yearKey].push({ label: `Event ${e}`, symptoms });
+      data[key].push({ label: `Event ${e}`, symptoms });
     }
   }
   return data;
@@ -477,6 +443,7 @@ function closeAllCards() {
 }
 
 Object.keys(data).forEach((yr, yi) => {
+  // Tab
   const tab = document.createElement('button');
   tab.className = 'year-tab' + (yi === 0 ? ' active' : '');
   tab.textContent = yr;
@@ -489,44 +456,34 @@ Object.keys(data).forEach((yr, yi) => {
   };
   tabsEl.appendChild(tab);
 
+  // Panel
   const panel = document.createElement('div');
   panel.className = 'year-panel' + (yi === 0 ? ' active' : '');
   panel.id = 'panel-' + yi;
 
-  const scroll = document.createElement('div');
-  scroll.className = 'timeline-scroll';
+  const timeline = document.createElement('div');
+  timeline.className = 'timeline';
 
-  let isDragging = false, startX, scrollLeft;
-  scroll.addEventListener('mousedown', e => { isDragging = true; startX = e.pageX - scroll.offsetLeft; scrollLeft = scroll.scrollLeft; scroll.style.cursor = 'grabbing'; });
-  scroll.addEventListener('mouseleave', () => { isDragging = false; scroll.style.cursor = 'grab'; });
-  scroll.addEventListener('mouseup', () => { isDragging = false; scroll.style.cursor = 'grab'; });
-  scroll.addEventListener('mousemove', e => { if (!isDragging) return; e.preventDefault(); const x = e.pageX - scroll.offsetLeft; scroll.scrollLeft = scrollLeft - (x - startX); });
+  data[yr].forEach((ev) => {
+    const row = document.createElement('div');
+    row.className = 'event-row';
 
-  const track = document.createElement('div');
-  track.className = 'timeline-track';
-
-  const line = document.createElement('div');
-  line.className = 'tl-line';
-  track.appendChild(line);
-
-  const lineFill = document.createElement('div');
-  lineFill.className = 'tl-line-fill';
-  track.appendChild(lineFill);
-
-  data[yr].forEach((ev, ei) => {
-    const col = document.createElement('div');
-    col.className = 'event-col';
-
+    // Dot
     const dot = document.createElement('div');
     dot.className = 'event-dot';
     dot.setAttribute('role', 'button');
     dot.setAttribute('aria-label', ev.label);
     dot.setAttribute('tabindex', '0');
 
+    // Body (label + card)
+    const body = document.createElement('div');
+    body.className = 'event-body';
+
     const lbl = document.createElement('div');
     lbl.className = 'event-label';
     lbl.textContent = ev.label;
 
+    // Card
     const card = document.createElement('div');
     card.className = 'event-card';
 
@@ -549,9 +506,9 @@ Object.keys(data).forEach((yr, yi) => {
     sympHeader.textContent = 'Associated symptoms';
     card.appendChild(sympHeader);
 
-    ev.symptoms.forEach((symp) => {
-      const row = document.createElement('div');
-      row.className = 'symptom-row';
+    ev.symptoms.forEach(symp => {
+      const srow = document.createElement('div');
+      srow.className = 'symptom-row';
 
       const trigger = document.createElement('div');
       trigger.className = 'symptom-trigger';
@@ -597,9 +554,9 @@ Object.keys(data).forEach((yr, yi) => {
       trigger.addEventListener('click', toggleSymp);
       trigger.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') toggleSymp(e); });
 
-      row.appendChild(trigger);
-      row.appendChild(intBox);
-      card.appendChild(row);
+      srow.appendChild(trigger);
+      srow.appendChild(intBox);
+      card.appendChild(srow);
     });
 
     const toggleCard = e => {
@@ -615,14 +572,14 @@ Object.keys(data).forEach((yr, yi) => {
     dot.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') toggleCard(e); });
     lbl.addEventListener('click', toggleCard);
 
-    col.appendChild(dot);
-    col.appendChild(lbl);
-    col.appendChild(card);
-    track.appendChild(col);
+    body.appendChild(lbl);
+    body.appendChild(card);
+    row.appendChild(dot);
+    row.appendChild(body);
+    timeline.appendChild(row);
   });
 
-  scroll.appendChild(track);
-  panel.appendChild(scroll);
+  panel.appendChild(timeline);
   panelsEl.appendChild(panel);
 });
 
