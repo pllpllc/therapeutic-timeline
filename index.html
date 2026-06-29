@@ -496,7 +496,7 @@
 
 <div class="main">
   <div class="year-tabs" id="yearTabs"></div>
-  <p class="timeline-hint">Select an event to expand symptoms, then select a symptom to reveal interventions.</p>
+  <p class="timeline-hint" id="timelineHint">Select an event to expand symptoms, then select a symptom to reveal interventions.</p>
   <div id="yearPanels"></div>
 </div>
 
@@ -590,26 +590,26 @@ function buildData() {
   const year1Data = [
     [{ name: "Anticipatory Anxiety", interventions: ["Wellness 101 (Fordham University)"] },{ name: "Social Anxiety", interventions: [] },{ name: "Existential Dread", interventions: [] }],
     [{ name: "Overwhelming Anxiety", interventions: ["Why Mental Health Matters (Cardozo Law)", "NYC Lawyers Assistance Program Information Session (CUNY Law)", "\u201CThe Mindfulness Room\u201D (DePaul University)", "\u201CSecrets to Success\u201D (Fordham University)", "The Insightful Mind Initiative (University of Miami)", "Maintaining Wellness in Law School (Roger Williams University)"] },{ name: "Social and Identity Related Stress", interventions: ["First-Generation Support Group (Boston University)", "Community Care Fair (UC Irvine)", "Professional Fundamentals (Drexel University)"] }],
-    [{ name: "Cold Call Trauma", interventions: [] },{ name: "Imposter Syndrome", interventions: ["Combating Imposter Syndrome (Cardozo Law)", "Lunch & Learn Programs (Northwestern)"] },{ name: "Social Shifts", interventions: [] },{ name: "Avoidance and/or Isolation", interventions: ["Mindfulness Course (Cardozo Law)", "Productivity Lab (University of Washington)", "Mental Health Collective (University of Miami)"] }],
-    [{ name: "Self Doubt", interventions: [] },{ name: "Comparing with Peers", interventions: [] },{ name: "Reduced Motivation", interventions: [] },{ name: "Analysis Paralysis", interventions: [] },{ name: "Rejection Sensitivity", interventions: [] },{ name: "Hopelessness", interventions: [] }],
-    [{ name: "Imposter Syndrome", interventions: ["Lunch & Learn Programs (Northwestern)"] },{ name: "Interpersonal Conflict", interventions: [] },{ name: "Feeling Overcommitted", interventions: [] },{ name: "Decision Fatigue", interventions: [] }],
+    [{ name: "Cold Call Trauma", interventions: [] },{ name: "Imposter Syndrome", interventions: ["Combating Imposter Syndrome (Cardozo Law)", "Lunch & Learn Programs (Northwestern)"] },{ name: "Social Shifts", interventions: [] },{ name: "Avoidance", interventions: ["Mindfulness Course (Cardozo Law)", "Productivity Lab (University of Washington)", "Mental Health Collective (University of Miami)"] }],
+    [{ name: "Self Doubt", interventions: [] },{ name: "Comparison Traps", interventions: [] },{ name: "Reduced Motivation", interventions: [] },{ name: "Analysis Paralysis", interventions: [] },{ name: "Rejection Sensitivity", interventions: [] },{ name: "Hopelessness", interventions: [] }],
+    [{ name: "Imposter Syndrome", interventions: ["Lunch & Learn Programs (Northwestern)"] },{ name: "Conflict with Others", interventions: [] },{ name: "Overcommitted", interventions: [] },{ name: "Decision Fatigue", interventions: [] }],
     [{ name: "Procrastination", interventions: ["Student Study Skills Group (Duquesne Law)"] },{ name: "Overwhelming Anxiety", interventions: ["Wellness Wednesdays (UC Irvine)", "Mental Health Awareness Week (Cardozo Law)", "\u201C10-Minute Mind\u201D (CUNY Law)", "DiveIN + Be Well Week (Drexel University)", "Wellness Week (Indiana University)", "Lunch & Learn Programs (Northwestern)"] },{ name: "Somatic Dysregulation", interventions: ["Dog Therapy (Cardozo Law)", "\u201CStress Free Zones\u201D (CUNY Law)", "Meditation Practice for Challenging Times (Duquesne Law)", "Kline Calm Wellness Space (Drexel University)", "Comfort K9 (University of Maryland)", "Mindfully Move Mondays (Penn State)"] },{ name: "Catastrophizing", interventions: [] },{ name: "Irregular Sleep and/or Diet", interventions: ["\u201CSleep Solution\u201D (Boston University)", "\u201CFood for Thought\u201D (Fordham University)", "\u201CCounselor\u2019s Corner\u201D (University of South Carolina)"] }],
-    [{ name: "Social Anxieties", interventions: ["Trivia Night (Gonzaga University)", "Bingo Night (Gonzaga University)"] },{ name: "Substance Use Concerns", interventions: ["Character & Fitness Training (Cardozo Law)", "RISE (Duquesne Law)", "\u201CMocktail Hour\u201D (American University)", "Sober Law Students Association (University of Miami)", "MN Law Recovery Group (University of Minnesota)", "Lunch & Learn Programs (Northwestern)"] }],
+    [{ name: "Social Anxiety", interventions: ["Trivia Night (Gonzaga University)", "Bingo Night (Gonzaga University)"] },{ name: "Substance Use Concerns", interventions: ["Character & Fitness Training (Cardozo Law)", "RISE (Duquesne Law)", "\u201CMocktail Hour\u201D (American University)", "Sober Law Students Association (University of Miami)", "MN Law Recovery Group (University of Minnesota)", "Lunch & Learn Programs (Northwestern)"] }],
     [{ name: "Procrastination", interventions: ["Practicing Law with ADHD (Boston University)"] },{ name: "Perfectionism", interventions: [] },{ name: "Existential Dread", interventions: ["Finding Your Why (Cardozo Law)", "Lunch & Learn Programs (Northwestern)"] }],
-    [{ name: "Time Management", interventions: [] },{ name: "Managing Uncertainty", interventions: ["Building You (Emotional Resilience) Group (Boston University)", "\u201CStress Free Zones\u201D (CUNY Law)", "\u201CGratitude Week\u201D (Fordham)", "Wellness Week (Indiana University)", "\u201CExam Breaks\u201D (Washington and Lee University)"] },{ name: "Comparing to others", interventions: [] }],
-    [{ name: "Comparing to Colleagues", interventions: [] },{ name: "Self Doubt", interventions: [] },{ name: "What is my Personal Story?!", interventions: [] }],
+    [{ name: "Poor Time Management", interventions: [] },{ name: "Intolerance of Uncertainty", interventions: ["Building You (Emotional Resilience) Group (Boston University)", "\u201CStress Free Zones\u201D (CUNY Law)", "\u201CGratitude Week\u201D (Fordham)", "Wellness Week (Indiana University)", "\u201CExam Breaks\u201D (Washington and Lee University)"] },{ name: "Comparison Traps", interventions: [] }],
+    [{ name: "Comparison Traps", interventions: [] },{ name: "Self Doubt", interventions: [] },{ name: "What is my Personal Story?!", interventions: [] }],
     [{ name: "Isolation", interventions: ["Friendsgiving (Roger Williams University)"] },{ name: "Familial Pressures", interventions: ["Law Parenting Collective (Gonzaga Law)"] },{ name: "Financial Stress", interventions: [] }],
     [{ name: "Decision Fatigue", interventions: [] },{ name: "Imposter Syndrome", interventions: [] },{ name: "Analysis Paralysis", interventions: [] }],
-    [{ name: "Managing Uncertainty", interventions: [] },{ name: "Existential Dread", interventions: [] },{ name: "Comparing with others", interventions: [] }],
-    [{ name: "Distractibility", interventions: ["\u201CStress Free Zones\u201D (CUNY Law)", "Wellness Week (Indiana University)"] },{ name: "Comparing with others", interventions: [] }],
-    [{ name: "Familial Pressures", interventions: [] },{ name: "School/Life Balance", interventions: ["Self-Care for Law Students (Arizona State University)", "DiveIN + Be Well Week (Drexel University)", "\u201CGame Watch\u201D (Gonzaga University)"] },{ name: "Boundary Setting", interventions: ["Productivity Lab (University of Washington)"] }],
-    [{ name: "Analysis Paralysis", interventions: [] },{ name: "Comparing with others", interventions: [] },{ name: "Professional Identity Questioning", interventions: ["Trauma-Informed Lawyering (Cardozo Law)", "Criminal Clinic Class (University of Utah)"] }],
-    [{ name: "Social Anxieties", interventions: [] },{ name: "Imposter Syndrome", interventions: [] },{ name: "Overcommitment Concerns", interventions: [] }],
-    [{ name: "Feeling Overcommitted", interventions: [] },{ name: "Conflict with others", interventions: [] }],
+    [{ name: "Intolerance of Uncertainty", interventions: [] },{ name: "Existential Dread", interventions: [] },{ name: "Comparison Traps", interventions: [] }],
+    [{ name: "Distractibility", interventions: ["\u201CStress Free Zones\u201D (CUNY Law)", "Wellness Week (Indiana University)"] },{ name: "Comparison Traps", interventions: [] }],
+    [{ name: "Familial Pressures", interventions: [] },{ name: "School/Life Imbalance", interventions: ["Self-Care for Law Students (Arizona State University)", "DiveIN + Be Well Week (Drexel University)", "\u201CGame Watch\u201D (Gonzaga University)"] },{ name: "Poor Boundaries", interventions: ["Productivity Lab (University of Washington)"] }],
+    [{ name: "Analysis Paralysis", interventions: [] },{ name: "Comparison Traps", interventions: [] },{ name: "Professional Identity Questioning", interventions: ["Trauma-Informed Lawyering (Cardozo Law)", "Criminal Clinic Class (University of Utah)"] }],
+    [{ name: "Social Anxiety", interventions: [] },{ name: "Imposter Syndrome", interventions: [] },{ name: "Overcommitted", interventions: [] }],
+    [{ name: "Overcommitted", interventions: [] },{ name: "Conflict with Others", interventions: [] }],
     [{ name: "Social Anxiety", interventions: [] },{ name: "Career Pressures", interventions: [] },{ name: "Identity Uncertainty", interventions: [] }],
     [{ name: "Social Anxiety", interventions: [] },{ name: "Loneliness", interventions: [] },{ name: "Substance Use Concerns", interventions: [] }],
-    [{ name: "Inconsistent Motivation", interventions: ["\u201CStress Free Zones\u201D (CUNY Law)", "\u201CExam Breaks\u201D (Washington and Lee University)"] },{ name: "Procrastination", interventions: [] }],
-    [{ name: "Imposter Syndrome", interventions: ["Wellness in Practice (Fordham)", "The Insightful Mind Initiative (University of Miami)"] },{ name: "Social Anxieties", interventions: ["Wellness in Lawyering (Cardozo Law)", "Legal Professions Class (University of Utah)"] }]
+    [{ name: "Reduced Motivation", interventions: ["\u201CStress Free Zones\u201D (CUNY Law)", "\u201CExam Breaks\u201D (Washington and Lee University)"] },{ name: "Procrastination", interventions: [] }],
+    [{ name: "Imposter Syndrome", interventions: ["Wellness in Practice (Fordham)", "The Insightful Mind Initiative (University of Miami)"] },{ name: "Social Anxiety", interventions: ["Wellness in Lawyering (Cardozo Law)", "Legal Professions Class (University of Utah)"] }]
   ];
   data["1L Year"] = year1Events.map((label, i) => ({
     label,
@@ -657,6 +657,7 @@ Object.keys(data).forEach((yr, yi) => {
     tab.classList.add('active');
     document.getElementById('panel-' + yi).classList.add('active');
     closeAllCards();
+    document.getElementById('timelineHint').style.display = 'block';
   };
   tabsEl.appendChild(tab);
 
@@ -789,6 +790,178 @@ Object.keys(data).forEach((yr, yi) => {
 });
 
 document.addEventListener('click', closeAllCards);
+
+// ── Search by Symptom tab ──────────────────────────────────────────
+(function buildSymptomIndex() {
+  // Collect all interventions per symptom name across all years
+  const symptomMap = {};
+  Object.values(data).forEach(events => {
+    events.forEach(ev => {
+      ev.symptoms.forEach(symp => {
+        if (!symptomMap[symp.name]) symptomMap[symp.name] = new Set();
+        symp.interventions.forEach(intv => {
+          if (intv && intv !== 'Intervention TBD') symptomMap[symp.name].add(intv);
+        });
+      });
+    });
+  });
+
+  // Category definitions in display order
+  const CATEGORIES = [
+    {
+      name: 'Anxiety & Stress Response',
+      color: 'var(--color-teal)',
+      symptoms: ['Anticipatory Anxiety','Overwhelming Anxiety','Social Anxiety','Catastrophizing','Cold Call Trauma','Somatic Dysregulation']
+    },
+    {
+      name: 'Identity & Self-Worth',
+      color: 'var(--color-orange)',
+      symptoms: ['Imposter Syndrome','Self Doubt','Identity Uncertainty','Professional Identity Questioning','"What is my Personal Story?!"','Social and Identity Related Stress','Comparison Traps','Rejection Sensitivity']
+    },
+    {
+      name: 'Motivation & Mood',
+      color: 'var(--color-yellow)',
+      symptoms: ['Reduced Motivation','Hopelessness','Existential Dread']
+    },
+    {
+      name: 'Executive Function & Productivity',
+      color: 'var(--color-pink)',
+      symptoms: ['Analysis Paralysis','Decision Fatigue','Distractibility','Procrastination','Perfectionism','Poor Time Management','Overcommitted']
+    },
+    {
+      name: 'Withdrawal & Connection',
+      color: 'var(--color-green)',
+      symptoms: ['Avoidance','Isolation','Loneliness','Conflict with Others','Social Shifts']
+    },
+    {
+      name: 'External Pressures',
+      color: 'var(--color-purple)',
+      symptoms: ['Career Pressures','Familial Pressures','Financial Stress']
+    },
+    {
+      name: 'Coping & Self-Regulation',
+      color: 'var(--primary)',
+      symptoms: ['Poor Boundaries','School/Life Imbalance','Intolerance of Uncertainty','Irregular Sleep and/or Diet','Substance Use Concerns']
+    }
+  ];
+
+  // Build tab
+  const tab = document.createElement('button');
+  tab.className = 'year-tab';
+  tab.textContent = 'Search by Symptom';
+  tab.onclick = () => {
+    document.querySelectorAll('.year-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.year-panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    panel.classList.add('active');
+    closeAllCards();
+    document.getElementById('timelineHint').style.display = 'none';
+  };
+  tabsEl.appendChild(tab);
+
+  // Build panel
+  const panel = document.createElement('div');
+  panel.className = 'year-panel';
+  panel.id = 'panel-symptom';
+
+  const intro = document.createElement('p');
+  intro.className = 'timeline-hint';
+  intro.textContent = 'All symptoms across the journey, with associated programming listed beneath each one.';
+  panel.appendChild(intro);
+
+  CATEGORIES.forEach(cat => {
+    // Category header
+    const catHeader = document.createElement('div');
+    catHeader.style.cssText = `
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 1.75rem 0 0.75rem;
+    `;
+    const catBar = document.createElement('div');
+    catBar.style.cssText = `width: 4px; height: 20px; border-radius: 2px; background: ${cat.color}; flex-shrink: 0;`;
+    const catTitle = document.createElement('div');
+    catTitle.style.cssText = `font-family: 'Lora', serif; font-size: 1rem; font-weight: 500; color: var(--text-dark);`;
+    catTitle.textContent = cat.name;
+    catHeader.appendChild(catBar);
+    catHeader.appendChild(catTitle);
+    panel.appendChild(catHeader);
+
+    // Grid of symptom cards for this category
+    const grid = document.createElement('div');
+    grid.style.cssText = 'display:grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 0.75rem;';
+
+    cat.symptoms.forEach(symptomName => {
+      const interventions = symptomMap[symptomName] ? Array.from(symptomMap[symptomName]) : [];
+
+      const card = document.createElement('div');
+      card.style.cssText = `
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-top: 3px solid ${cat.color};
+        border-radius: 10px;
+        overflow: hidden;
+        cursor: pointer;
+      `;
+
+      const titleRow = document.createElement('div');
+      titleRow.style.cssText = `
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 14px;
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: var(--text-dark);
+        user-select: none;
+      `;
+      const titleText = document.createElement('div');
+      titleText.textContent = symptomName;
+      const arrow = document.createElement('div');
+      arrow.textContent = '›';
+      arrow.style.cssText = `font-size: 1rem; color: var(--text-light); transition: transform 0.2s; transform: rotate(0deg);`;
+      titleRow.appendChild(titleText);
+      titleRow.appendChild(arrow);
+      card.appendChild(titleRow);
+
+      const body = document.createElement('div');
+      body.style.cssText = `display: none; padding: 0 14px 10px; border-top: 1px solid var(--border-light);`;
+
+      card.addEventListener('click', () => {
+        const isOpen = body.style.display === 'block';
+        body.style.display = isOpen ? 'none' : 'block';
+        arrow.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(90deg)';
+      });
+
+      if (interventions.length === 0) {
+        const none = document.createElement('div');
+        none.style.cssText = 'font-size: 0.72rem; color: var(--text-light); font-style: italic; padding-top: 8px;';
+        none.textContent = 'No programming listed yet';
+        body.appendChild(none);
+      } else {
+        interventions.forEach(intv => {
+          const row = document.createElement('div');
+          row.style.cssText = 'display:flex; align-items:flex-start; gap:7px; margin-bottom:4px; margin-top:4px;';
+          const dot = document.createElement('div');
+          dot.style.cssText = `width:5px; height:5px; border-radius:50%; background:${cat.color}; flex-shrink:0; margin-top:6px;`;
+          const lbl = document.createElement('div');
+          lbl.style.cssText = 'font-size:0.75rem; color:var(--text-mid); line-height:1.45;';
+          lbl.textContent = intv;
+          row.appendChild(dot);
+          row.appendChild(lbl);
+          body.appendChild(row);
+        });
+      }
+
+      card.appendChild(body);
+      grid.appendChild(card);
+    });
+
+    panel.appendChild(grid);
+  });
+
+  panelsEl.appendChild(panel);
+})();
 </script>
 </body>
 </html>
