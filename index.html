@@ -4,86 +4,118 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Therapeutic Journey | Phillip L. Lentz, LMHC</title>
-<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Source+Sans+3:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --cream: #f7f5f0;
-    --warm-white: #fdfcfa;
-    --text-dark: #2a2825;
-    --text-mid: #5a5650;
-    --text-light: #8a8680;
-    --teal: #1D9E75;
-    --teal-dark: #0F6E56;
-    --teal-light: #E1F5EE;
-    --teal-pale: #f0faf6;
-    --border: #e0ddd8;
-    --border-light: #eeece8;
+    /* Page palette — soft lavender wash like the PDF background */
+    --page-bg: #eceaf8;
+    --card-bg: #ffffff;
+    --surface: #f7f6fd;
+
+    /* Text */
+    --text-dark: #1e1a3c;
+    --text-mid: #4a4570;
+    --text-light: #8f8ab0;
+
+    /* Accent — the PDF's node colors as a cycling system */
+    --color-teal:   #5bc8c8;
+    --color-orange: #f4a35a;
+    --color-yellow: #f5d44a;
+    --color-pink:   #f285b0;
+    --color-green:  #7ed87e;
+    --color-purple: #a78bda;
+
+    /* Primary interactive color (purple, matching the PDF year labels) */
+    --primary: #7b68d0;
+    --primary-dark: #5a4fb0;
+    --primary-pale: #ede9fb;
+
+    /* Borders */
+    --border: #d8d4f0;
+    --border-light: #eceaf8;
   }
 
   html { scroll-behavior: smooth; }
 
   body {
-    font-family: 'Source Sans 3', sans-serif;
-    background: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    background: var(--page-bg);
     color: var(--text-dark);
     min-height: 100vh;
-    font-weight: 300;
+    font-weight: 400;
     line-height: 1.7;
   }
 
+  /* ─── Header ─── */
   header {
-    background: var(--warm-white);
+    background: var(--card-bg);
     border-bottom: 1px solid var(--border);
-    padding: 1.5rem 2rem;
+    padding: 1.25rem 2rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
     position: sticky;
     top: 0;
     z-index: 100;
+    box-shadow: 0 2px 12px rgba(123,104,208,0.07);
   }
 
   .header-name {
     font-family: 'Lora', serif;
-    font-size: 1.15rem;
-    font-weight: 400;
+    font-size: 1.1rem;
+    font-weight: 500;
     color: var(--text-dark);
     letter-spacing: 0.01em;
   }
 
   .header-title {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     color: var(--text-light);
-    font-weight: 300;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    margin-top: 2px;
   }
 
   .header-back {
-    font-size: 0.85rem;
-    color: var(--teal);
+    font-size: 0.82rem;
+    color: var(--primary);
     text-decoration: none;
     letter-spacing: 0.02em;
     display: flex;
     align-items: center;
     gap: 6px;
     transition: color 0.15s;
+    font-weight: 500;
   }
-  .header-back:hover { color: var(--teal-dark); }
+  .header-back:hover { color: var(--primary-dark); }
   .header-back svg { width: 14px; height: 14px; }
 
+  /* ─── Hero ─── */
   .hero {
-    background: var(--warm-white);
+    background: var(--card-bg);
     padding: 3rem 2rem 2.5rem;
     text-align: center;
     border-bottom: 1px solid var(--border);
   }
 
+  .hero-eyebrow {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--primary);
+    background: var(--primary-pale);
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin-bottom: 1rem;
+  }
+
   .hero h1 {
     font-family: 'Lora', serif;
-    font-size: 2rem;
+    font-size: 2.1rem;
     font-weight: 400;
     color: var(--text-dark);
     margin-bottom: 0.75rem;
@@ -91,93 +123,123 @@
   }
 
   .hero p {
-    font-size: 1rem;
+    font-size: 0.95rem;
     color: var(--text-mid);
-    max-width: 560px;
+    max-width: 520px;
     margin: 0 auto;
-    font-weight: 300;
+    font-weight: 400;
   }
 
+  /* ─── Color legend ─── */
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 1.5rem;
+  }
+  .legend-chip {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.7rem;
+    color: var(--text-mid);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+
+  /* ─── Main ─── */
   .main {
     padding: 2.5rem 2rem;
-    max-width: 1200px;
+    max-width: 860px;
     margin: 0 auto;
   }
 
-  /* Year tabs */
+  /* ─── Year tabs ─── */
   .year-tabs {
     display: flex;
-    gap: 0;
+    gap: 8px;
     margin-bottom: 2rem;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    overflow: hidden;
-    background: var(--warm-white);
-    width: fit-content;
+    flex-wrap: wrap;
   }
 
   .year-tab {
-    padding: 10px 32px;
-    font-family: 'Source Sans 3', sans-serif;
+    padding: 9px 28px;
+    font-family: 'DM Sans', sans-serif;
     font-size: 0.875rem;
-    font-weight: 400;
+    font-weight: 500;
     color: var(--text-mid);
-    background: transparent;
-    border: none;
-    border-right: 1px solid var(--border);
+    background: var(--card-bg);
+    border: 1.5px solid var(--border);
+    border-radius: 50px;
     cursor: pointer;
     transition: all 0.15s;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.02em;
   }
-  .year-tab:last-child { border-right: none; }
-  .year-tab:hover { background: var(--teal-pale); color: var(--teal-dark); }
-  .year-tab.active { background: var(--teal); color: #fff; }
+  .year-tab:hover {
+    background: var(--primary-pale);
+    color: var(--primary-dark);
+    border-color: var(--primary);
+  }
+  .year-tab.active {
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--primary);
+    box-shadow: 0 3px 10px rgba(123,104,208,0.3);
+  }
 
   .year-panel { display: none; }
   .year-panel.active { display: block; }
 
   .timeline-hint {
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     color: var(--text-light);
-    margin-bottom: 2rem;
+    margin-bottom: 1.75rem;
+    font-weight: 400;
   }
 
-  /* Vertical timeline */
+  /* ─── Vertical timeline ─── */
   .timeline {
     position: relative;
-    padding-left: 2.5rem;
+    padding-left: 2.75rem;
   }
 
-  /* The vertical line running down the left */
   .timeline::before {
     content: '';
     position: absolute;
-    left: 10px;
-    top: 6px;
-    bottom: 6px;
-    width: 1px;
-    background: var(--border);
+    left: 12px;
+    top: 8px;
+    bottom: 8px;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--color-purple), var(--color-teal), var(--color-orange), var(--color-pink));
+    border-radius: 2px;
+    opacity: 0.4;
   }
 
-  /* Each event row */
+  /* ─── Each event row ─── */
   .event-row {
     position: relative;
-    margin-bottom: 1.25rem;
+    margin-bottom: 1rem;
     display: flex;
     align-items: flex-start;
     gap: 1rem;
   }
 
-  /* Dot on the vertical line */
+  /* Colored dot on timeline */
   .event-dot {
     position: absolute;
-    left: -2.5rem;
-    top: 4px;
-    width: 22px;
-    height: 22px;
+    left: -2.75rem;
+    top: 6px;
+    width: 26px;
+    height: 26px;
     border-radius: 50%;
-    background: var(--warm-white);
-    border: 1.5px solid var(--border);
+    background: var(--card-bg);
+    border: 2.5px solid var(--dot-color, var(--border));
     cursor: pointer;
     transition: all 0.18s ease;
     display: flex;
@@ -188,59 +250,79 @@
   }
   .event-dot::after {
     content: '';
-    width: 7px;
-    height: 7px;
+    width: 9px;
+    height: 9px;
     border-radius: 50%;
-    background: var(--border);
+    background: var(--dot-color, var(--border));
     transition: all 0.18s ease;
+    opacity: 0.7;
   }
-  .event-dot:hover { border-color: var(--teal); transform: scale(1.12); }
-  .event-dot:hover::after { background: var(--teal); }
-  .event-dot.visited { border-color: var(--teal); }
-  .event-dot.visited::after { background: var(--teal); }
-  .event-dot.open { border-color: var(--teal-dark); background: var(--teal); transform: scale(1.15); }
-  .event-dot.open::after { background: #fff; }
+  .event-dot:hover {
+    transform: scale(1.15);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--dot-color, var(--primary)) 20%, transparent);
+  }
+  .event-dot.open {
+    background: var(--dot-color, var(--primary));
+    transform: scale(1.18);
+    box-shadow: 0 0 0 5px color-mix(in srgb, var(--dot-color, var(--primary)) 25%, transparent);
+  }
+  .event-dot.open::after { background: #fff; opacity: 1; }
+  .event-dot.visited { border-width: 3px; }
 
-  /* Label beside the dot */
+  /* Pill label */
   .event-label {
-    font-size: 0.875rem;
-    color: var(--text-mid);
+    display: inline-block;
+    font-size: 0.95rem;
+    color: var(--text-dark);
     cursor: pointer;
-    line-height: 1.5;
-    padding-top: 2px;
-    transition: color 0.15s;
-    font-weight: 300;
+    line-height: 1.4;
+    padding: 6px 16px;
+    border-radius: 50px;
+    background: var(--card-bg);
+    border: 1.5px solid var(--border);
+    font-weight: 600;
+    transition: all 0.15s;
     user-select: none;
+    margin-top: 1px;
   }
-  .event-label:hover { color: var(--teal-dark); }
-  .event-dot.open ~ .event-body .event-label { color: var(--teal-dark); font-weight: 400; }
+  .event-label:hover {
+    border-color: var(--dot-color, var(--primary));
+    background: color-mix(in srgb, var(--dot-color, var(--primary)) 10%, white);
+    color: var(--text-dark);
+  }
+  .event-dot.open ~ .event-body .event-label {
+    background: color-mix(in srgb, var(--dot-color, var(--primary)) 15%, white);
+    border-color: var(--dot-color, var(--primary));
+    color: var(--text-dark);
+  }
 
   .event-body { flex: 1; }
 
-  /* Expandable card below the label */
+  /* ─── Expandable card ─── */
   .event-card {
     display: none;
-    margin-top: 0.6rem;
-    background: var(--warm-white);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 14px 16px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    margin-top: 0.65rem;
+    background: var(--card-bg);
+    border: 1.5px solid var(--border);
+    border-radius: 16px;
+    padding: 16px 18px;
+    box-shadow: 0 4px 20px rgba(123,104,208,0.09);
     animation: fadeDown 0.15s ease;
-    max-width: 480px;
+    max-width: 500px;
+    border-top: 3px solid var(--dot-color, var(--primary));
   }
   .event-card.open { display: block; }
 
   @keyframes fadeDown {
-    from { opacity: 0; transform: translateY(-4px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; transform: translateY(-5px); }
+    to   { opacity: 1; transform: translateY(0); }
   }
 
   .card-header {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     padding-bottom: 10px;
     border-bottom: 1px solid var(--border-light);
     gap: 8px;
@@ -248,32 +330,38 @@
 
   .card-title {
     font-family: 'Lora', serif;
-    font-size: 0.9rem;
-    font-weight: 400;
+    font-size: 1.05rem;
+    font-weight: 500;
     color: var(--text-dark);
     line-height: 1.35;
   }
 
   .close-btn {
-    background: none;
+    background: var(--page-bg);
     border: none;
     color: var(--text-light);
     cursor: pointer;
-    font-size: 1.1rem;
+    font-size: 1rem;
     line-height: 1;
     padding: 0;
     flex-shrink: 0;
-    transition: color 0.15s;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.12s;
   }
-  .close-btn:hover { color: var(--text-dark); }
+  .close-btn:hover { background: var(--border); color: var(--text-dark); }
 
   .symptoms-label {
-    font-size: 0.65rem;
+    font-size: 0.7rem;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.1em;
     color: var(--text-light);
     margin-bottom: 8px;
-    font-weight: 400;
+    font-weight: 600;
   }
 
   .symptom-row { margin-bottom: 4px; }
@@ -283,78 +371,79 @@
     align-items: flex-start;
     gap: 8px;
     cursor: pointer;
-    padding: 4px 6px;
-    border-radius: 5px;
+    padding: 5px 8px;
+    border-radius: 8px;
     transition: background 0.12s;
   }
-  .symptom-trigger:hover { background: var(--teal-pale); }
-  .symptom-trigger.open { background: var(--teal-pale); }
+  .symptom-trigger:hover { background: var(--page-bg); }
+  .symptom-trigger.open  { background: var(--page-bg); }
 
   .symp-dot {
-    width: 9px;
-    height: 9px;
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
-    border: 1.5px solid var(--teal);
+    border: 2px solid var(--dot-color, var(--primary));
     background: transparent;
     flex-shrink: 0;
-    margin-top: 4px;
+    margin-top: 5px;
     transition: all 0.12s;
   }
   .symptom-trigger.open .symp-dot,
-  .symptom-trigger:hover .symp-dot { background: var(--teal); }
+  .symptom-trigger:hover .symp-dot { background: var(--dot-color, var(--primary)); }
 
   .symp-name {
-    font-size: 0.8rem;
+    font-size: 0.92rem;
     color: var(--text-mid);
-    line-height: 1.4;
-    font-weight: 300;
+    line-height: 1.45;
+    font-weight: 500;
   }
-  .symptom-trigger.open .symp-name { color: var(--teal-dark); font-weight: 400; }
+  .symptom-trigger.open .symp-name { color: var(--text-dark); font-weight: 600; }
 
   .interventions {
     display: none;
-    margin: 4px 0 6px 17px;
-    padding: 8px 10px;
-    background: var(--teal-pale);
-    border-radius: 6px;
-    border-left: 2px solid var(--teal-light);
+    margin: 5px 0 7px 18px;
+    padding: 10px 12px;
+    background: var(--primary-pale);
+    border-radius: 10px;
+    border-left: 3px solid var(--dot-color, var(--primary));
   }
   .interventions.open { display: block; }
 
   .int-label-header {
-    font-size: 0.6rem;
+    font-size: 0.68rem;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--teal-dark);
-    margin-bottom: 6px;
-    font-weight: 400;
+    letter-spacing: 0.1em;
+    color: var(--primary-dark);
+    margin-bottom: 7px;
+    font-weight: 700;
     opacity: 0.8;
   }
 
   .intervention-row {
     display: flex;
     align-items: flex-start;
-    gap: 6px;
-    margin-bottom: 4px;
+    gap: 7px;
+    margin-bottom: 5px;
   }
   .intervention-row:last-child { margin-bottom: 0; }
 
   .int-dot {
-    width: 4px;
-    height: 4px;
+    width: 5px;
+    height: 5px;
     border-radius: 50%;
-    background: var(--teal);
+    background: var(--primary);
     flex-shrink: 0;
-    margin-top: 6px;
+    margin-top: 7px;
   }
 
   .int-label {
-    font-size: 0.75rem;
-    color: var(--teal-dark);
-    line-height: 1.45;
-    font-weight: 300;
+    font-size: 0.85rem;
+    color: var(--primary-dark);
+    line-height: 1.5;
+    font-weight: 500;
   }
 
+  /* ─── Footer ─── */
   footer {
     text-align: center;
     padding: 2.5rem 1rem;
@@ -362,19 +451,19 @@
     margin-top: 4rem;
     font-size: 0.8rem;
     color: var(--text-light);
-    background: var(--warm-white);
+    background: var(--card-bg);
   }
-  footer a { color: var(--teal); text-decoration: none; }
-  footer a:hover { color: var(--teal-dark); }
+  footer a { color: var(--primary); text-decoration: none; font-weight: 500; }
+  footer a:hover { color: var(--primary-dark); }
 
+  /* ─── Responsive ─── */
   @media (max-width: 600px) {
-    .hero h1 { font-size: 1.5rem; }
+    .hero h1 { font-size: 1.6rem; }
     .hero { padding: 2rem 1.25rem 1.75rem; }
     header { padding: 1rem 1.25rem; }
-    .header-name { font-size: 1rem; }
     .main { padding: 1.5rem 1rem; }
-    .year-tab { padding: 9px 18px; font-size: 0.8rem; }
     .event-card { max-width: 100%; }
+    .legend { gap: 10px; }
   }
 </style>
 </head>
@@ -383,7 +472,7 @@
 <header>
   <div>
     <div class="header-name">Phillip L. Lentz</div>
-    <div class="header-title">Psychotherapy, LMHC</div>
+    <div class="header-title">Hosted by the University of Washington, School of Law</div>
   </div>
   <a href="https://pllpllc.com" class="header-back">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
@@ -392,8 +481,17 @@
 </header>
 
 <div class="hero">
-  <h1>Your Therapeutic Journey</h1>
-  <p>Select any event to explore what you might experience, and the approaches we can use together.</p>
+  <div class="hero-eyebrow">Law School Wellness</div>
+  <h1>Your Law School Journey, Maybe</h1>
+  <p>Select any event to explore what you might experience as a student, and some of the programming being used across the country.</p>
+  <div class="legend">
+    <div class="legend-chip"><div class="legend-dot" style="background:var(--color-teal)"></div>Academics</div>
+    <div class="legend-chip"><div class="legend-dot" style="background:var(--color-orange)"></div>Career</div>
+    <div class="legend-chip"><div class="legend-dot" style="background:var(--color-yellow)"></div>Social</div>
+    <div class="legend-chip"><div class="legend-dot" style="background:var(--color-pink)"></div>Extracurricular</div>
+    <div class="legend-chip"><div class="legend-dot" style="background:var(--color-green)"></div>Milestones</div>
+    <div class="legend-chip"><div class="legend-dot" style="background:var(--color-purple)"></div>Transitions</div>
+  </div>
 </div>
 
 <div class="main">
@@ -408,28 +506,135 @@
 </footer>
 
 <script>
-const YEARS = 3;
-const EVENTS_PER_YEAR = 17;
+// Category → color map
+const CATEGORY_COLORS = {
+  academic:        'var(--color-teal)',
+  career:          'var(--color-orange)',
+  social:          'var(--color-yellow)',
+  extracurricular: 'var(--color-pink)',
+  milestone:       'var(--color-green)',
+  transition:      'var(--color-purple)',
+};
+
+// Canonical label → category (normalised to lowercase for matching)
+const EVENT_CATEGORIES = {
+  // Academics
+  'first class':           'academic',
+  'class content':         'academic',
+  'class content impacts': 'academic',
+  'midterms':              'academic',
+  'midterm':               'academic',
+  'final memo':            'academic',
+  'finals':                'academic',
+  'waiting for grades':    'academic',
+  'register for classes':  'academic',
+  // Career
+  'oci':                   'career',
+  'job applications':      'career',
+  'job apps':              'career',
+  'summer job':            'career',
+  'fellowships':           'career',
+  // Social
+  'bar review':            'social',
+  '"bar review" night':    'social',
+  "barrister's ball":      'social',
+  // Extracurricular
+  'moot court':            'extracurricular',
+  'apply for journal':     'extracurricular',
+  'apply for clinic':      'extracurricular',
+  'sba election':          'extracurricular',
+  'sba elections':         'extracurricular',
+  'join rso':              'extracurricular',
+  // Milestones
+  'orientation':           'milestone',
+  'thanksgiving':          'milestone',
+  'graduation':            'milestone',
+  'bar prep':              'milestone',
+  // Transitions (everything else)
+  'august':                'transition',
+  'july':                  'transition',
+  'winter holidays':       'transition',
+};
+
+function colorForLabel(label) {
+  const key = label.toLowerCase().trim();
+  const cat = EVENT_CATEGORIES[key] || 'transition';
+  return CATEGORY_COLORS[cat];
+}
+
 const SYMPTOMS_PER_EVENT = 3;
 const INTERVENTIONS_PER_SYMPTOM = 3;
 
+function makeSymptoms() {
+  const symptoms = [];
+  for (let s = 1; s <= SYMPTOMS_PER_EVENT; s++) {
+    const interventions = [];
+    for (let i = 1; i <= INTERVENTIONS_PER_SYMPTOM; i++) {
+      interventions.push(`Intervention ${i}`);
+    }
+    symptoms.push({ name: `Symptom ${s}`, interventions });
+  }
+  return symptoms;
+}
+
 function buildData() {
   const data = {};
-  for (let y = 1; y <= YEARS; y++) {
-    const key = `Year ${y}`;
-    data[key] = [];
-    for (let e = 1; e <= EVENTS_PER_YEAR; e++) {
-      const symptoms = [];
-      for (let s = 1; s <= SYMPTOMS_PER_EVENT; s++) {
-        const interventions = [];
-        for (let i = 1; i <= INTERVENTIONS_PER_SYMPTOM; i++) {
-          interventions.push(`Intervention ${i}`);
-        }
-        symptoms.push({ name: `Symptom ${s}`, interventions });
-      }
-      data[key].push({ label: `Event ${e}`, symptoms });
-    }
-  }
+
+  const year1Events = [
+    "August", "Orientation", "First Class", "OCI", "Moot Court", "Midterms",
+    "Bar Review", "Final Memo", "Finals", "Job Applications", "Thanksgiving",
+    "Apply for Journal", "Waiting for Grades", "Finals", "Winter Holidays",
+    "Apply for Clinic", "SBA Election", "Moot Court", "Register for Classes",
+    "Barrister's Ball", "Finals", "Summer Job"
+  ];
+  const year1Data = [
+    [{ name: "Anticipatory Anxiety", interventions: ["Wellness 101 (Fordham University)"] },{ name: "Social Anxiety", interventions: [] },{ name: "Existential Dread", interventions: [] }],
+    [{ name: "Overwhelming Anxiety", interventions: ["Why Mental Health Matters (Cardozo Law)", "NYC Lawyers Assistance Program Information Session (CUNY Law)", "\u201CThe Mindfulness Room\u201D (DePaul University)", "\u201CSecrets to Success\u201D (Fordham University)", "The Insightful Mind Initiative (University of Miami)", "Maintaining Wellness in Law School (Roger Williams University)"] },{ name: "Social and Identity Related Stress", interventions: ["First-Generation Support Group (Boston University)", "Community Care Fair (UC Irvine)", "Professional Fundamentals (Drexel University)"] }],
+    [{ name: "Cold Call Trauma", interventions: [] },{ name: "Imposter Syndrome", interventions: ["Combating Imposter Syndrome (Cardozo Law)", "Lunch & Learn Programs (Northwestern)"] },{ name: "Social Shifts", interventions: [] },{ name: "Avoidance and/or Isolation", interventions: ["Mindfulness Course (Cardozo Law)", "Productivity Lab (University of Washington)", "Mental Health Collective (University of Miami)"] }],
+    [{ name: "Self Doubt", interventions: [] },{ name: "Comparing with Peers", interventions: [] },{ name: "Reduced Motivation", interventions: [] },{ name: "Analysis Paralysis", interventions: [] },{ name: "Rejection Sensitivity", interventions: [] },{ name: "Hopelessness", interventions: [] }],
+    [{ name: "Imposter Syndrome", interventions: ["Lunch & Learn Programs (Northwestern)"] },{ name: "Interpersonal Conflict", interventions: [] },{ name: "Feeling Overcommitted", interventions: [] },{ name: "Decision Fatigue", interventions: [] }],
+    [{ name: "Procrastination", interventions: ["Student Study Skills Group (Duquesne Law)"] },{ name: "Overwhelming Anxiety", interventions: ["Wellness Wednesdays (UC Irvine)", "Mental Health Awareness Week (Cardozo Law)", "\u201C10-Minute Mind\u201D (CUNY Law)", "DiveIN + Be Well Week (Drexel University)", "Wellness Week (Indiana University)", "Lunch & Learn Programs (Northwestern)"] },{ name: "Somatic Dysregulation", interventions: ["Dog Therapy (Cardozo Law)", "\u201CStress Free Zones\u201D (CUNY Law)", "Meditation Practice for Challenging Times (Duquesne Law)", "Kline Calm Wellness Space (Drexel University)", "Comfort K9 (University of Maryland)", "Mindfully Move Mondays (Penn State)"] },{ name: "Catastrophizing", interventions: [] },{ name: "Irregular Sleep and/or Diet", interventions: ["\u201CSleep Solution\u201D (Boston University)", "\u201CFood for Thought\u201D (Fordham University)", "\u201CCounselor\u2019s Corner\u201D (University of South Carolina)"] }],
+    [{ name: "Social Anxieties", interventions: ["Trivia Night (Gonzaga University)", "Bingo Night (Gonzaga University)"] },{ name: "Substance Use Concerns", interventions: ["Character & Fitness Training (Cardozo Law)", "RISE (Duquesne Law)", "\u201CMocktail Hour\u201D (American University)", "Sober Law Students Association (University of Miami)", "MN Law Recovery Group (University of Minnesota)", "Lunch & Learn Programs (Northwestern)"] }],
+    [{ name: "Procrastination", interventions: ["Practicing Law with ADHD (Boston University)"] },{ name: "Perfectionism", interventions: [] },{ name: "Existential Dread", interventions: ["Finding Your Why (Cardozo Law)", "Lunch & Learn Programs (Northwestern)"] }],
+    [{ name: "Time Management", interventions: [] },{ name: "Managing Uncertainty", interventions: ["Building You (Emotional Resilience) Group (Boston University)", "\u201CStress Free Zones\u201D (CUNY Law)", "\u201CGratitude Week\u201D (Fordham)", "Wellness Week (Indiana University)", "\u201CExam Breaks\u201D (Washington and Lee University)"] },{ name: "Comparing to others", interventions: [] }],
+    [{ name: "Comparing to Colleagues", interventions: [] },{ name: "Self Doubt", interventions: [] },{ name: "What is my Personal Story?!", interventions: [] }],
+    [{ name: "Isolation", interventions: ["Friendsgiving (Roger Williams University)"] },{ name: "Familial Pressures", interventions: ["Law Parenting Collective (Gonzaga Law)"] },{ name: "Financial Stress", interventions: [] }],
+    [{ name: "Decision Fatigue", interventions: [] },{ name: "Imposter Syndrome", interventions: [] },{ name: "Analysis Paralysis", interventions: [] }],
+    [{ name: "Managing Uncertainty", interventions: [] },{ name: "Existential Dread", interventions: [] },{ name: "Comparing with others", interventions: [] }],
+    [{ name: "Distractibility", interventions: ["\u201CStress Free Zones\u201D (CUNY Law)", "Wellness Week (Indiana University)"] },{ name: "Comparing with others", interventions: [] }],
+    [{ name: "Familial Pressures", interventions: [] },{ name: "School/Life Balance", interventions: ["Self-Care for Law Students (Arizona State University)", "DiveIN + Be Well Week (Drexel University)", "\u201CGame Watch\u201D (Gonzaga University)"] },{ name: "Boundary Setting", interventions: ["Productivity Lab (University of Washington)"] }],
+    [{ name: "Analysis Paralysis", interventions: [] },{ name: "Comparing with others", interventions: [] },{ name: "Professional Identity Questioning", interventions: ["Trauma-Informed Lawyering (Cardozo Law)", "Criminal Clinic Class (University of Utah)"] }],
+    [{ name: "Social Anxieties", interventions: [] },{ name: "Imposter Syndrome", interventions: [] },{ name: "Overcommitment Concerns", interventions: [] }],
+    [{ name: "Feeling Overcommitted", interventions: [] },{ name: "Conflict with others", interventions: [] }],
+    [{ name: "Social Anxiety", interventions: [] },{ name: "Career Pressures", interventions: [] },{ name: "Identity Uncertainty", interventions: [] }],
+    [{ name: "Social Anxiety", interventions: [] },{ name: "Loneliness", interventions: [] },{ name: "Substance Use Concerns", interventions: [] }],
+    [{ name: "Inconsistent Motivation", interventions: ["\u201CStress Free Zones\u201D (CUNY Law)", "\u201CExam Breaks\u201D (Washington and Lee University)"] },{ name: "Procrastination", interventions: [] }],
+    [{ name: "Imposter Syndrome", interventions: ["Wellness in Practice (Fordham)", "The Insightful Mind Initiative (University of Miami)"] },{ name: "Social Anxieties", interventions: ["Wellness in Lawyering (Cardozo Law)", "Legal Professions Class (University of Utah)"] }]
+  ];
+  data["1L Year"] = year1Events.map((label, i) => ({
+    label,
+    symptoms: year1Data[i].map(s => ({
+      name: s.name,
+      interventions: s.interventions.length ? s.interventions : ["Intervention TBD"]
+    }))
+  }));
+
+  const year2Events = [
+    "August", "OCI", "Join RSO", "Fellowships", "Class Content",
+    "Apply for Journal", "Moot Court", "Bar Review", "Finals",
+    "Job Applications", "Apply for Clinic", "Thanksgiving",
+    "Waiting for Grades", "Finals", "Winter Holidays",
+    "Waiting for Grades", "Job Applications", "Moot Court",
+    "Apply for Clinic", "Register for Classes", "Summer Job"
+  ];
+  data["2L Year"] = year2Events.map(label => ({ label, symptoms: makeSymptoms() }));
+
+  const year3Events = [
+    "August", "Moot Court", "Finals", "Job Applications", "Finals",
+    "SBA Elections", "Finals", "Bar Prep", "Graduation", "July"
+  ];
+  data["3L Year"] = year3Events.map(label => ({ label, symptoms: makeSymptoms() }));
+
   return data;
 }
 
@@ -443,7 +648,6 @@ function closeAllCards() {
 }
 
 Object.keys(data).forEach((yr, yi) => {
-  // Tab
   const tab = document.createElement('button');
   tab.className = 'year-tab' + (yi === 0 ? ' active' : '');
   tab.textContent = yr;
@@ -456,7 +660,6 @@ Object.keys(data).forEach((yr, yi) => {
   };
   tabsEl.appendChild(tab);
 
-  // Panel
   const panel = document.createElement('div');
   panel.className = 'year-panel' + (yi === 0 ? ' active' : '');
   panel.id = 'panel-' + yi;
@@ -464,28 +667,29 @@ Object.keys(data).forEach((yr, yi) => {
   const timeline = document.createElement('div');
   timeline.className = 'timeline';
 
-  data[yr].forEach((ev) => {
+  data[yr].forEach((ev, ei) => {
+    const color = colorForLabel(ev.label);
     const row = document.createElement('div');
     row.className = 'event-row';
 
-    // Dot
     const dot = document.createElement('div');
     dot.className = 'event-dot';
+    dot.style.setProperty('--dot-color', color);
     dot.setAttribute('role', 'button');
     dot.setAttribute('aria-label', ev.label);
     dot.setAttribute('tabindex', '0');
 
-    // Body (label + card)
     const body = document.createElement('div');
     body.className = 'event-body';
+    body.style.setProperty('--dot-color', color);
 
     const lbl = document.createElement('div');
     lbl.className = 'event-label';
     lbl.textContent = ev.label;
 
-    // Card
     const card = document.createElement('div');
     card.className = 'event-card';
+    card.style.setProperty('--dot-color', color);
 
     const cardHeader = document.createElement('div');
     cardHeader.className = 'card-header';
@@ -536,6 +740,7 @@ Object.keys(data).forEach((yr, yi) => {
         irow.className = 'intervention-row';
         const idot = document.createElement('div');
         idot.className = 'int-dot';
+        idot.style.background = color;
         const ilbl = document.createElement('div');
         ilbl.className = 'int-label';
         ilbl.textContent = intv;
