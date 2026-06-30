@@ -484,7 +484,7 @@
   <div class="hero-eyebrow">Law School Wellness</div>
   <h1>Your Law School Journey, Maybe</h1>
   <p>Select any event to explore what you might experience as a student, and some of the programming being used across the country.</p>
-  <div class="legend">
+  <div class="legend" id="colorLegend">
     <div class="legend-chip"><div class="legend-dot" style="background:var(--color-teal)"></div>Academics</div>
     <div class="legend-chip"><div class="legend-dot" style="background:var(--color-orange)"></div>Career</div>
     <div class="legend-chip"><div class="legend-dot" style="background:var(--color-yellow)"></div>Social</div>
@@ -658,6 +658,7 @@ Object.keys(data).forEach((yr, yi) => {
     document.getElementById('panel-' + yi).classList.add('active');
     closeAllCards();
     document.getElementById('timelineHint').style.display = 'block';
+    document.getElementById('colorLegend').style.display = 'flex';
   };
   tabsEl.appendChild(tab);
 
@@ -808,41 +809,13 @@ document.addEventListener('click', closeAllCards);
 
   // Category definitions in display order
   const CATEGORIES = [
-    {
-      name: 'Anxiety & Stress Response',
-      color: 'var(--color-teal)',
-      symptoms: ['Anticipatory Anxiety','Overwhelming Anxiety','Social Anxiety','Catastrophizing','Cold Call Trauma','Somatic Dysregulation']
-    },
-    {
-      name: 'Identity & Self-Worth',
-      color: 'var(--color-orange)',
-      symptoms: ['Imposter Syndrome','Self Doubt','Identity Uncertainty','Professional Identity Questioning','"What is my Personal Story?!"','Social and Identity Related Stress','Comparison Traps','Rejection Sensitivity']
-    },
-    {
-      name: 'Motivation & Mood',
-      color: 'var(--color-yellow)',
-      symptoms: ['Reduced Motivation','Hopelessness','Existential Dread']
-    },
-    {
-      name: 'Executive Function & Productivity',
-      color: 'var(--color-pink)',
-      symptoms: ['Analysis Paralysis','Decision Fatigue','Distractibility','Procrastination','Perfectionism','Poor Time Management','Overcommitted']
-    },
-    {
-      name: 'Withdrawal & Connection',
-      color: 'var(--color-green)',
-      symptoms: ['Avoidance','Isolation','Loneliness','Conflict with Others','Social Shifts']
-    },
-    {
-      name: 'External Pressures',
-      color: 'var(--color-purple)',
-      symptoms: ['Career Pressures','Familial Pressures','Financial Stress']
-    },
-    {
-      name: 'Coping & Self-Regulation',
-      color: 'var(--primary)',
-      symptoms: ['Poor Boundaries','School/Life Imbalance','Intolerance of Uncertainty','Irregular Sleep and/or Diet','Substance Use Concerns']
-    }
+    { name: 'Anxiety & Stress Response', symptoms: ['Anticipatory Anxiety','Overwhelming Anxiety','Social Anxiety','Catastrophizing','Cold Call Trauma','Somatic Dysregulation'] },
+    { name: 'Identity & Self-Worth', symptoms: ['Imposter Syndrome','Self Doubt','Identity Uncertainty','Professional Identity Questioning','"What is my Personal Story?!"','Social and Identity Related Stress','Comparison Traps','Rejection Sensitivity'] },
+    { name: 'Motivation & Mood', symptoms: ['Reduced Motivation','Hopelessness','Existential Dread'] },
+    { name: 'Executive Function & Productivity', symptoms: ['Analysis Paralysis','Decision Fatigue','Distractibility','Procrastination','Perfectionism','Poor Time Management','Overcommitted'] },
+    { name: 'Withdrawal & Connection', symptoms: ['Avoidance','Isolation','Loneliness','Conflict with Others','Social Shifts'] },
+    { name: 'External Pressures', symptoms: ['Career Pressures','Familial Pressures','Financial Stress'] },
+    { name: 'Coping & Self-Regulation', symptoms: ['Poor Boundaries','School/Life Imbalance','Intolerance of Uncertainty','Irregular Sleep and/or Diet','Substance Use Concerns'] }
   ];
 
   // Build tab
@@ -856,6 +829,7 @@ document.addEventListener('click', closeAllCards);
     panel.classList.add('active');
     closeAllCards();
     document.getElementById('timelineHint').style.display = 'none';
+    document.getElementById('colorLegend').style.display = 'none';
   };
   tabsEl.appendChild(tab);
 
@@ -866,100 +840,138 @@ document.addEventListener('click', closeAllCards);
 
   const intro = document.createElement('p');
   intro.className = 'timeline-hint';
-  intro.textContent = 'All symptoms across the journey, with associated programming listed beneath each one.';
+  intro.textContent = 'Select a theme to explore its symptoms, then select a symptom to reveal associated programming.';
   panel.appendChild(intro);
 
-  CATEGORIES.forEach(cat => {
-    // Category header
-    const catHeader = document.createElement('div');
-    catHeader.style.cssText = `
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin: 1.75rem 0 0.75rem;
-    `;
-    const catBar = document.createElement('div');
-    catBar.style.cssText = `width: 4px; height: 20px; border-radius: 2px; background: ${cat.color}; flex-shrink: 0;`;
-    const catTitle = document.createElement('div');
-    catTitle.style.cssText = `font-family: 'Lora', serif; font-size: 1rem; font-weight: 500; color: var(--text-dark);`;
-    catTitle.textContent = cat.name;
-    catHeader.appendChild(catBar);
-    catHeader.appendChild(catTitle);
-    panel.appendChild(catHeader);
+  const timeline = document.createElement('div');
+  timeline.className = 'timeline';
 
-    // Grid of symptom cards for this category
-    const grid = document.createElement('div');
-    grid.style.cssText = 'display:grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 0.75rem;';
+  CATEGORIES.forEach(cat => {
+    const row = document.createElement('div');
+    row.className = 'event-row';
+
+    const dot = document.createElement('div');
+    dot.className = 'event-dot';
+    dot.setAttribute('role', 'button');
+    dot.setAttribute('aria-label', cat.name);
+    dot.setAttribute('tabindex', '0');
+
+    const body = document.createElement('div');
+    body.className = 'event-body';
+
+    const lbl = document.createElement('div');
+    lbl.className = 'event-label';
+    lbl.textContent = cat.name;
+
+    const card = document.createElement('div');
+    card.className = 'event-card';
+
+    const cardHeader = document.createElement('div');
+    cardHeader.className = 'card-header';
+    const cardTitle = document.createElement('div');
+    cardTitle.className = 'card-title';
+    cardTitle.textContent = cat.name;
+    const closeBtn = document.createElement('button');
+    closeBtn.className = 'close-btn';
+    closeBtn.innerHTML = '&times;';
+    closeBtn.setAttribute('aria-label', 'Close');
+    closeBtn.onclick = e => { e.stopPropagation(); closeAllCards(); };
+    cardHeader.appendChild(cardTitle);
+    cardHeader.appendChild(closeBtn);
+    card.appendChild(cardHeader);
+
+    const sympHeader = document.createElement('div');
+    sympHeader.className = 'symptoms-label';
+    sympHeader.textContent = 'Symptoms in this theme';
+    card.appendChild(sympHeader);
 
     cat.symptoms.forEach(symptomName => {
       const interventions = symptomMap[symptomName] ? Array.from(symptomMap[symptomName]) : [];
 
-      const card = document.createElement('div');
-      card.style.cssText = `
-        background: var(--card-bg);
-        border: 1px solid var(--border);
-        border-top: 3px solid ${cat.color};
-        border-radius: 10px;
-        overflow: hidden;
-        cursor: pointer;
-      `;
+      const srow = document.createElement('div');
+      srow.className = 'symptom-row';
 
-      const titleRow = document.createElement('div');
-      titleRow.style.cssText = `
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 10px 14px;
-        font-size: 0.85rem;
-        font-weight: 500;
-        color: var(--text-dark);
-        user-select: none;
-      `;
-      const titleText = document.createElement('div');
-      titleText.textContent = symptomName;
-      const arrow = document.createElement('div');
-      arrow.textContent = '›';
-      arrow.style.cssText = `font-size: 1rem; color: var(--text-light); transition: transform 0.2s; transform: rotate(0deg);`;
-      titleRow.appendChild(titleText);
-      titleRow.appendChild(arrow);
-      card.appendChild(titleRow);
+      const trigger = document.createElement('div');
+      trigger.className = 'symptom-trigger';
+      trigger.setAttribute('role', 'button');
+      trigger.setAttribute('tabindex', '0');
 
-      const body = document.createElement('div');
-      body.style.cssText = `display: none; padding: 0 14px 10px; border-top: 1px solid var(--border-light);`;
+      const sdot = document.createElement('div');
+      sdot.className = 'symp-dot';
+      const sname = document.createElement('div');
+      sname.className = 'symp-name';
+      sname.textContent = symptomName;
+      trigger.appendChild(sdot);
+      trigger.appendChild(sname);
 
-      card.addEventListener('click', () => {
-        const isOpen = body.style.display === 'block';
-        body.style.display = isOpen ? 'none' : 'block';
-        arrow.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(90deg)';
-      });
+      const intBox = document.createElement('div');
+      intBox.className = 'interventions';
+
+      const intHeader = document.createElement('div');
+      intHeader.className = 'int-label-header';
+      intHeader.textContent = 'Programming';
+      intBox.appendChild(intHeader);
 
       if (interventions.length === 0) {
-        const none = document.createElement('div');
-        none.style.cssText = 'font-size: 0.72rem; color: var(--text-light); font-style: italic; padding-top: 8px;';
-        none.textContent = 'No programming listed yet';
-        body.appendChild(none);
+        const irow = document.createElement('div');
+        irow.className = 'intervention-row';
+        const ilbl = document.createElement('div');
+        ilbl.className = 'int-label';
+        ilbl.style.fontStyle = 'italic';
+        ilbl.textContent = 'No programming listed yet';
+        irow.appendChild(ilbl);
+        intBox.appendChild(irow);
       } else {
         interventions.forEach(intv => {
-          const row = document.createElement('div');
-          row.style.cssText = 'display:flex; align-items:flex-start; gap:7px; margin-bottom:4px; margin-top:4px;';
-          const dot = document.createElement('div');
-          dot.style.cssText = `width:5px; height:5px; border-radius:50%; background:${cat.color}; flex-shrink:0; margin-top:6px;`;
-          const lbl = document.createElement('div');
-          lbl.style.cssText = 'font-size:0.75rem; color:var(--text-mid); line-height:1.45;';
-          lbl.textContent = intv;
-          row.appendChild(dot);
-          row.appendChild(lbl);
-          body.appendChild(row);
+          const irow = document.createElement('div');
+          irow.className = 'intervention-row';
+          const idot = document.createElement('div');
+          idot.className = 'int-dot';
+          const ilbl = document.createElement('div');
+          ilbl.className = 'int-label';
+          ilbl.textContent = intv;
+          irow.appendChild(idot);
+          irow.appendChild(ilbl);
+          intBox.appendChild(irow);
         });
       }
 
-      card.appendChild(body);
-      grid.appendChild(card);
+      const toggleSymp = e => {
+        e.stopPropagation();
+        const wasOpen = trigger.classList.contains('open');
+        card.querySelectorAll('.symptom-trigger').forEach(t => t.classList.remove('open'));
+        card.querySelectorAll('.interventions').forEach(b => b.classList.remove('open'));
+        if (!wasOpen) { trigger.classList.add('open'); intBox.classList.add('open'); }
+      };
+      trigger.addEventListener('click', toggleSymp);
+      trigger.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') toggleSymp(e); });
+
+      srow.appendChild(trigger);
+      srow.appendChild(intBox);
+      card.appendChild(srow);
     });
 
-    panel.appendChild(grid);
+    const toggleCard = e => {
+      e.stopPropagation();
+      const wasOpen = dot.classList.contains('open');
+      closeAllCards();
+      if (!wasOpen) {
+        dot.classList.add('open', 'visited');
+        card.classList.add('open');
+      }
+    };
+    dot.addEventListener('click', toggleCard);
+    dot.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') toggleCard(e); });
+    lbl.addEventListener('click', toggleCard);
+
+    body.appendChild(lbl);
+    body.appendChild(card);
+    row.appendChild(dot);
+    row.appendChild(body);
+    timeline.appendChild(row);
   });
 
+  panel.appendChild(timeline);
   panelsEl.appendChild(panel);
 })();
 </script>
