@@ -580,7 +580,7 @@ function makeSymptoms() {
 function buildData() {
   const data = {};
 
-  const year1Events = ["August", "Orientation", "First Class", "OCI", "Moot Court", "Midterms", "Bar Review", "Final Memo", "Finals", "Job Applications", "Thanksgiving", "Apply for Journal", "Waiting for Grades", "Finals", "Winter Holidays", "Apply for Clinic", "SBA Election", "Moot Court", "Register for Classes", "Barrister's Ball", "Finals", "Summer Job"];
+  const year1Events = ["August", "Orientation", "First Class", "OCI", "Moot Court", "Midterms", "'Bar Review' Night", "Final Memo", "Finals", "Job Applications", "Thanksgiving", "Apply for Journal", "Waiting for Grades", "Finals", "Winter Holidays", "Apply for Clinic", "SBA Election", "Moot Court", "Register for Classes", "Barrister's Ball", "Finals", "Summer Job"];
   const year1Data = [
     // August
     [    { name: "Somatic Dysregulation", interventions: [
@@ -693,7 +693,7 @@ function buildData() {
     })) : makeSymptoms()
   }));
 
-  const year2Events = ["August", "OCI", "Join RSO", "Fellowships", "Class Content", "Apply for Journal", "Moot Court", "Bar Review", "Finals", "Job Applications", "Apply for Clinic", "Thanksgiving", "Waiting for Grades", "Finals", "Winter Holidays", "Waiting for Grades", "Job Applications", "Moot Court", "Apply for Clinic", "Register for Classes", "Summer Job"];
+  const year2Events = ["August", "OCI", "Join RSO", "Fellowships", "Class Content", "Apply for Journal", "Moot Court", "'Bar Review' Night", "Finals", "Job Applications", "Apply for Clinic", "Thanksgiving", "Waiting for Grades", "Finals", "Winter Holidays", "Waiting for Grades", "Job Applications", "Moot Court", "Apply for Clinic", "Register for Classes", "Summer Job"];
   const year2Data = [
     // August
     [{ name: "Somatic Dysregulation", interventions: [{ name: "“10-Minute Mind” (CUNY Law)", desc: "10 Minute Mindfulness Meditation Course to start out every day right!", link: "https://www.instagram.com/p/DMtL8YSB5oq/" }] }, { name: "Financial Stress", interventions: [{ name: "“Counselor’s Corner” (University of South Carolina)", desc: "Counselor’s Corner provides our students with access to food items/textbooks/clothing/hygienic products.", link: "https://secure.touchnet.net/C21544_ustores/web/product_detail.jsp?PRODUCTID=6733" }] }, { name: "Anticipatory Anxiety", interventions: [{ name: "DiveIN + Be Well Week (Drexel University)", desc: "A week to explore different aspects of wellness.", link: "https://www.aals.org/wp-content/uploads/sites/12/2023/02/Drexel-Law-Mental-Health-Resources.pdf" }, { name: "Wellness Week (Indiana University)", desc: "A semesterly effort to participate in a larger cultural movement toward well-being in the legal field.", link: "https://mckinneylaw.iu.edu/news/releases/2021/08/iu-mckinney-kicks-off-academic-year-with-wellness-week-.html" }] }],
@@ -1170,13 +1170,13 @@ document.addEventListener('click', closeAllCards);
 
   // Category definitions in display order
   const CATEGORIES = [
-    { name: 'Anxiety & Stress Response', symptoms: ['Anticipatory Anxiety','Catastrophizing','Cold Call Trauma','Overwhelming Anxiety','Performance Anxiety','Social Anxiety','Somatic Dysregulation'] },
-    { name: 'Identity & Self-Worth', symptoms: ['Comparison Traps','Identity Uncertainty','Imposter Syndrome','Professional Identity Questioning','Rejection Sensitivity','Self Doubt','Social and Identity Related Stress','"What is my Personal Story?!"'] },
-    { name: 'Motivation & Mood', symptoms: ['Existential Dread','Hopelessness','Reduced Motivation'] },
-    { name: 'Executive Function & Productivity', symptoms: ['Analysis Paralysis','Decision Fatigue','Distractibility','Overcommitted','Perfectionism','Poor Time Management','Procrastination'] },
-    { name: 'Withdrawal & Connection', symptoms: ['Avoidance','Conflict with Others','Isolation','Loneliness','Social Shifts'] },
-    { name: 'External Pressures', symptoms: ['Career Pressures','Familial Pressures','Financial Stress'] },
-    { name: 'Coping & Self-Regulation', symptoms: ['Intolerance of Uncertainty','Irregular Sleep and/or Diet','Poor Boundaries','School/Life Imbalance','Substance Use Concerns'] }
+    { name: 'Anxiety & Stress Response', color: '#1D7A8A', symptoms: ['Anticipatory Anxiety','Catastrophizing','Cold Call Trauma','Overwhelming Anxiety','Performance Anxiety','Social Anxiety','Somatic Dysregulation'] },
+    { name: 'Identity & Self-Worth', color: '#7B3F00', symptoms: ['Comparison Traps','Identity Uncertainty','Imposter Syndrome','Professional Identity Questioning','Rejection Sensitivity','Self Doubt','Social and Identity Related Stress','"What is my Personal Story?!"'] },
+    { name: 'Motivation & Mood', color: '#2E7D32', symptoms: ['Existential Dread','Hopelessness','Reduced Motivation'] },
+    { name: 'Executive Function & Productivity', color: '#4B2E83', symptoms: ['Analysis Paralysis','Decision Fatigue','Distractibility','Overcommitted','Perfectionism','Poor Time Management','Procrastination'] },
+    { name: 'Withdrawal & Connection', color: '#1A5276', symptoms: ['Avoidance','Conflict with Others','Isolation','Loneliness','Social Shifts'] },
+    { name: 'External Pressures', color: '#6D4C41', symptoms: ['Career Pressures','Familial Pressures','Financial Stress'] },
+    { name: 'Coping & Self-Regulation', color: '#4A235A', symptoms: ['Intolerance of Uncertainty','Irregular Sleep and/or Diet','Poor Boundaries','School/Life Imbalance','Substance Use Concerns'] }
   ];
 
   // Build tab
@@ -1216,6 +1216,8 @@ document.addEventListener('click', closeAllCards);
     dot.setAttribute('role', 'button');
     dot.setAttribute('aria-label', cat.name);
     dot.setAttribute('tabindex', '0');
+    dot.style.borderColor = cat.color;
+    dot.querySelector = dot.querySelector || (() => null);
 
     const body = document.createElement('div');
     body.className = 'event-body';
@@ -1223,15 +1225,19 @@ document.addEventListener('click', closeAllCards);
     const lbl = document.createElement('div');
     lbl.className = 'event-label';
     lbl.textContent = cat.name;
+    lbl.style.color = cat.color;
+    lbl.style.fontWeight = '500';
 
     const card = document.createElement('div');
     card.className = 'event-card';
+    card.style.borderTop = `3px solid ${cat.color}`;
 
     const cardHeader = document.createElement('div');
     cardHeader.className = 'card-header';
     const cardTitle = document.createElement('div');
     cardTitle.className = 'card-title';
     cardTitle.textContent = cat.name;
+    cardTitle.style.color = cat.color;
     const closeBtn = document.createElement('button');
     closeBtn.className = 'close-btn';
     closeBtn.innerHTML = '&times;';
@@ -1259,6 +1265,7 @@ document.addEventListener('click', closeAllCards);
 
       const sdot = document.createElement('div');
       sdot.className = 'symp-dot';
+      sdot.style.borderColor = cat.color;
       const sname = document.createElement('div');
       sname.className = 'symp-name';
       sname.textContent = symptomName;
@@ -1267,9 +1274,11 @@ document.addEventListener('click', closeAllCards);
 
       const intBox = document.createElement('div');
       intBox.className = 'interventions';
+      intBox.style.borderLeftColor = cat.color;
 
       const intHeader = document.createElement('div');
       intHeader.className = 'int-label-header';
+      intHeader.style.color = cat.color;
       intHeader.textContent = 'Programming';
       intBox.appendChild(intHeader);
 
