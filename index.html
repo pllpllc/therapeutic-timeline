@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Therapeutic Journey | Phillip L. Lentz, LMHC</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    /* Page palette — soft lavender wash like the PDF background */
+    --page-bg: #eceaf8;
+    --card-bg: #ffffff;
+    --surface: #f7f6fd;
+
+    /* Text */
+    --text-dark: #1e1a3c;
+    --text-mid: #4a4570;
+    --text-light: #8f8ab0;
+
+    /* Accent — the PDF's node colors as a cycling system */
+    --color-teal:   #9C27B0;
+    --color-orange: #FF9800;
+    --color-yellow: #F0E442;
+    --color-pink:   #4CAF50;
+    --color-green:  #E53935;
+    --color-purple: #2196F3;
+
+    /* Primary interactive color (purple, matching the PDF year labels) */
+    --primary: #7b68d0;
+    --primary-dark: #5a4fb0;
+    --primary-pale: #ede9fb;
+
+    /* Borders */
+    --border: #d8d4f0;
+    --border-light: #eceaf8;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--page-bg);
+    color: var(--text-dark);
+    min-height: 100vh;
+    font-weight: 400;
+    line-height: 1.7;
+  }
+
+  /* ─── Header ─── */
+  header {
+    background: var(--card-bg);
+    border-bottom: 1px solid var(--border);
+    padding: 1.25rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(123,104,208,0.07);
+  }
+
+  .header-name {
+    font-family: 'Lora', serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text-dark);
+    letter-spacing: 0.01em;
+  }
+
+  .header-title {
+    font-size: 0.75rem;
+    color: var(--text-light);
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    margin-top: 2px;
+  }
+
+  .header-back {
+    font-size: 0.82rem;
+    color: var(--primary);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.15s;
+    font-weight: 500;
+  }
+  .header-back:hover { color: var(--primary-dark); }
+  .header-back svg { width: 14px; height: 14px; }
+
+  /* ─── Hero ─── */
+  .hero {
+    background: var(--card-bg);
+    padding: 3rem 2rem 2.5rem;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero-eyebrow {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--primary);
+    background: var(--primary-pale);
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin-bottom: 1rem;
+  }
+
+  .hero h1 {
+    font-family: 'Lora', serif;
+    font-size: 2.1rem;
+    font-weight: 400;
+    color: var(--text-dark);
+    margin-bottom: 0.75rem;
+    line-height: 1.3;
+  }
+
+  .hero p {
+    font-size: 0.95rem;
+    color: var(--text-mid);
+    max-width: 520px;
+    margin: 0 auto;
+    font-weight: 400;
+  }
+
+  /* ─── Color legend ─── */
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 1.5rem;
+  }
+  .legend-chip {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.7rem;
+    color: var(--text-mid);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+
+  /* ─── Main ─── */
+  .main {
+    padding: 2.5rem 2rem;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  /* ─── Year tabs ─── */
+  .year-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .year-tab {
+    padding: 9px 28px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-mid);
+    background: var(--card-bg);
+    border: 1.5px solid var(--border);
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.15s;
+    letter-spacing: 0.02em;
+  }
+  .year-tab:hover {
+    background: var(--primary-pale);
+    color: var(--primary-dark);
+    border-color: var(--primary);
+  }
+  .year-tab.active {
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--primary);
+    box-shadow: 0 3px 10px rgba(123,104,208,0.3);
+  }
+
+  .year-panel { display: none; }
+  .year-panel.active { display: block; }
+
+  .timeline-hint {
+    font-size: 0.78rem;
+    color: var(--text-light);
+    margin-bottom: 1.75rem;
+    font-weight: 400;
+  }
+
+  /* ─── Vertical timeline ─── */
+  .timeline {
+    position: relative;
+    padding-left: 2.75rem;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 12px;
+    top: 8px;
+    bottom: 8px;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--color-purple), var(--color-teal), var(--color-orange), var(--color-pink));
+    border-radius: 2px;
+    opacity: 0.4;
+  }
+
+  /* ─── Each event row ─── */
+  .event-row {
+    position: relative;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  /* Colored dot on timeline */
+  .event-dot {
+    position: absolute;
+    left: -2.75rem;
+    top: 6px;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--dot-color, var(--border));
+    border: 2.5px solid var(--dot-color, var(--border));
+    cursor: pointer;
+    transition: all 0.18s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    z-index: 2;
+  }
+  .event-dot::after {
+    content: '';
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.5);
+    transition: all 0.18s ease;
+  }
+  .event-dot:hover {
+    transform: scale(1.15);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--dot-color, var(--primary)) 20%, transparent);
+  }
+  .event-dot.open {
+    background: var(--dot-color, var(--primary));
+    transform: scale(1.18);
+    box-shadow: 0 0 0 5px color-mix(in srgb, var(--dot-color, var(--primary)) 25%, transparent);
+  }
+  .event-dot.open::after { background: #fff; opacity: 1; }
+  .event-dot.visited { border-width: 3px; }
+
+  /* Pill label */
+  .event-label {
+    display: inline-block;
+    font-size: 0.95rem;
+    color: var(--text-dark);
+    cursor: pointer;
+    line-height: 1.4;
+    padding: 6px 16px;
+    border-radius: 50px;
+    background: var(--card-bg);
+    border: 1.5px solid var(--border);
+    font-weight: 600;
+    transition: all 0.15s;
+    user-select: none;
+    margin-top: 1px;
+  }
+  .event-label:hover {
+    border-color: var(--dot-color, var(--primary));
+    background: color-mix(in srgb, var(--dot-color, var(--primary)) 10%, white);
+    color: var(--text-dark);
+  }
+  .event-dot.open ~ .event-body .event-label {
+    background: color-mix(in srgb, var(--dot-color, var(--primary)) 15%, white);
+    border-color: var(--dot-color, var(--primary));
+    color: var(--text-dark);
+  }
+
+  .event-body { flex: 1; }
+
+  /* ─── Expandable card ─── */
+  .event-card {
+    display: none;
+    margin-top: 0.65rem;
+    background: var(--card-bg);
+    border: 1.5px solid var(--border);
+    border-radius: 16px;
+    padding: 16px 18px;
+    box-shadow: 0 4px 20px rgba(123,104,208,0.09);
+    animation: fadeDown 0.15s ease;
+    max-width: 500px;
+    border-top: 3px solid var(--dot-color, var(--primary));
+  }
+  .event-card.open { display: block; }
+
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-5px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-light);
+    gap: 8px;
+  }
+
+  .card-title {
+    font-family: 'Lora', serif;
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--text-dark);
+    line-height: 1.35;
+  }
+
+  .close-btn {
+    background: var(--page-bg);
+    border: none;
+    color: var(--text-light);
+    cursor: pointer;
+    font-size: 1rem;
+    line-height: 1;
+    padding: 0;
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.12s;
+  }
+  .close-btn:hover { background: var(--border); color: var(--text-dark); }
+
+  .symptoms-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-light);
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+
+  .symptom-row { margin-bottom: 4px; }
+
+  .symptom-trigger {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    cursor: pointer;
+    padding: 5px 8px;
+    border-radius: 8px;
+    transition: background 0.12s;
+  }
+  .symptom-trigger:hover { background: var(--page-bg); }
+  .symptom-trigger.open  { background: var(--page-bg); }
+
+  .symp-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 2px solid var(--dot-color, var(--primary));
+    background: transparent;
+    flex-shrink: 0;
+    margin-top: 5px;
+    transition: all 0.12s;
+  }
+  .symptom-trigger.open .symp-dot,
+  .symptom-trigger:hover .symp-dot { background: var(--dot-color, var(--primary)); }
+
+  .symp-name {
+    font-size: 0.92rem;
+    color: var(--text-mid);
+    line-height: 1.45;
+    font-weight: 500;
+  }
+  .symptom-trigger.open .symp-name { color: var(--text-dark); font-weight: 600; }
+
+  .interventions {
+    display: none;
+    margin: 5px 0 7px 18px;
+    padding: 10px 12px;
+    background: var(--primary-pale);
+    border-radius: 10px;
+    border-left: 3px solid var(--dot-color, var(--primary));
+  }
+  .interventions.open { display: block; }
+
+  .int-label-header {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--primary-dark);
+    margin-bottom: 7px;
+    font-weight: 700;
+    opacity: 0.8;
+  }
+
+  .intervention-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 7px;
+    margin-bottom: 5px;
+  }
+  .intervention-row:last-child { margin-bottom: 0; }
+
+  .int-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--primary);
+    flex-shrink: 0;
+    margin-top: 7px;
+  }
+
+  .int-label {
+    font-size: 0.85rem;
+    color: var(--primary-dark);
+    line-height: 1.5;
+    font-weight: 500;
+  }
+
+  /* ─── Footer ─── */
+  footer {
+    text-align: center;
+    padding: 2.5rem 1rem;
+    border-top: 1px solid var(--border);
+    margin-top: 4rem;
+    font-size: 0.8rem;
+    color: var(--text-light);
+    background: var(--card-bg);
+  }
+  footer a { color: var(--primary); text-decoration: none; font-weight: 500; }
+  footer a:hover { color: var(--primary-dark); }
+
+  /* ─── Responsive ─── */
+  @media (max-width: 600px) {
+    .hero h1 { font-size: 1.6rem; }
+    .hero { padding: 2rem 1.25rem 1.75rem; }
+    header { padding: 1rem 1.25rem; }
+    .main { padding: 1.5rem 1rem; }
+    .event-card { max-width: 100%; }
+    .legend { gap: 10px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="header-name">Phillip L. Lentz</div>
+    <div class="header-title">Hosted by the University of Washington, School of Law</div>
+  </div>
+  <a href="https://pllpllc.com" class="header-back">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    Back to site
+  </a>
+</header>
+
+<div class="hero">
+  <div class="hero-eyebrow">Law School Wellness</div>
+  <h1>Your Law School Journey, Maybe</h1>
+  <p>Select any event to explore what you might experience as a student, and some of the programming being used across the country.</p>
+  <div class="legend" id="colorLegend">
+    <div class="legend-chip"><div class="legend-dot" style="background:var(--color-teal)"></div>Academics</div>
+    <div class="legend-chip"><div class="legend-dot" style="background:var(--color-orange)"></div>Career</div>
+    <div class="legend-chip"><div class="legend-dot" style="background:var(--color-yellow)"></div>Social</div>
+    <div class="legend-chip"><div class="legend-dot" style="background:var(--color-pink)"></div>Extracurricular</div>
+    <div class="legend-chip"><div class="legend-dot" style="background:var(--color-green)"></div>Milestones</div>
+    <div class="legend-chip"><div class="legend-dot" style="background:var(--color-purple)"></div>Transitions</div>
+  </div>
+</div>
+
+<div class="main">
+  <div class="year-tabs" id="yearTabs"></div>
+  <p class="timeline-hint" id="timelineHint">Select an event to expand symptoms, then select a symptom to reveal interventions.</p>
+  <div id="yearPanels"></div>
+</div>
+
+<footer>
+  <p>Phillip L. Lentz, LMHC &nbsp;·&nbsp; <a href="mailto:plentz@uw.edu">plentz@uw.edu</a></p>
+</footer>
+
+<script>
+// Category → color map
+const CATEGORY_COLORS = {
+  academic:        'var(--color-teal)',
+  career:          'var(--color-orange)',
+  social:          'var(--color-yellow)',
+  extracurricular: 'var(--color-pink)',
+  milestone:       'var(--color-green)',
+  transition:      'var(--color-purple)',
+};
+
+const EVENT_CATEGORIES = {
+  'august':               'academic',
+  'big law':              'academic',
+  'first class':          'academic',
+  'midterms':             'academic',
+  'finals':               'academic',
+  'final memo':           'academic',
+  'waiting for grades':   'academic',
+  'winter holidays':      'academic',
+  'winter holiday':       'academic',
+  'register for classes': 'academic',
+  'class content':        'academic',
+  'bar prep':             'academic',
+  'summer job':           'career',
+  'job applications':     'career',
+  'oci':                  'career',
+  'fellowships':          'career',
+  'bar review night':     'social',
+  'barristers ball':      'social',
+  'thanksgiving':         'social',
+  'moot court':           'extracurricular',
+  'apply for journal':    'extracurricular',
+  'apply for clinic':     'extracurricular',
+  'sba election':         'extracurricular',
+  'sba elections':        'extracurricular',
+  'join rso':             'extracurricular',
+  'orientation':          'milestone',
+  'graduation':           'milestone',
+  'july':                 'milestone',
+};
+
+function getColor(label) {
+  const key = label.toLowerCase().trim();
+  const cat = EVENT_CATEGORIES[key] || 'transition';
+  return CATEGORY_COLORS[cat];
+}
+
+function makeSymptoms() {
+  return [{name:'Symptom 1',interventions:[{name:'Intervention TBD',desc:'No description provided',link:'No link available'}]},{name:'Symptom 2',interventions:[{name:'Intervention TBD',desc:'No description provided',link:'No link available'}]},{name:'Symptom 3',interventions:[{name:'Intervention TBD',desc:'No description provided',link:'No link available'}]}];
+}
+
+function buildData() {
+  const data = {};
+const year1Events=["August","Big Law","Orientation","First Class","OCI","Moot Court","Midterms","Bar Review Night","Final Memo","Job Applications","Thanksgiving","Apply for Journal","Finals","Winter Holidays","Waiting for Grades","Apply for Clinic","SBA Election","Register for Classes","Barristers Ball","Summer Job"];
+const year1Data=[[{name:"Somatic Dysregulation",interventions:[{name:"“10-Minute Mind” (CUNY Law)",desc:"10 Minute Mindfulness Meditation Course to start out every day right!",link:"https://www.instagram.com/p/DMtL8YSB5oq/"}]},{name:"Anticipatory Anxiety",interventions:[{name:"“Secrets to Success: Growth Mindset and Resilience” (Fordham University)",desc:"A mandatory wellness workshop for first-year students at Fordham Law designed to build resilience and manage legal education pressures.",link:"https://www.fordham.edu/school-of-law/life-at-fordham-law/office-of-professionalism/fordham-law-wellness/"},{name:"Wellness 101: Strategies for Maintaining Health and Happiness in Law School and Practice  (Fordham University)",desc:"Interactive presentation designed to introduce students to the broad array of mental health and wellness resources available to them as Fordham Law students, and teach them practical strategies they can use to manage stress and cultivate resilience and well-being throughout law school and law practice",link:"https://www.fordham.edu/school-of-law/life-at-fordham-law/office-of-professionalism/1l-professionalism-curriculum/"},{name:"“The Mindfulness Room” (DePaul University)",desc:"A quiet space for the College of Law community to use when anyone needs a moment to sit in quiet, meditate, pray, reflect, or otherwise have a peaceful and restorative movement away from the stress of law school.",link:"https://law.depaul.edu/student-resources/student-affairs/wellness"},{name:"DiveIN + Be Well Week (Drexel University)",desc:"A week to explore different aspects of wellness, including emotional, physical/safety, social, financial, spiritual, occupational, and intellectual well-being. Programming also includes therapy dogs, massage therapy, primal scream therapy, meditation, improv comedy, and more.",link:"https://www.aals.org/wp-content/uploads/sites/12/2023/02/Drexel-Law-Mental-Health-Resources.pdf"},{name:"Mental Health Collective (University of Miami)",desc:"A supportive, judgment-free community where students can talk openly about stress, pressure, and everything in between.",link:"https://student.law.miami.edu/student-life/student-organizations/mental-health-collective/"},{name:"Motion to Thrive (University of Texas)",desc:"A presentation on bar prep stress: its sources, strategies for managing symptoms, and resources available.",link:"Email Dr. Timm for presentation materials: Maria.Timm@austin.utexas.edu"}]}],[{name:"Overwhelming Anxiety",interventions:[]},{name:"Career Pressures",interventions:[]}],[{name:"Anticipatory Anxiety",interventions:[{name:"The Insightful Mind Initiative (University of Miami)",desc:"The Insightful Mind Initiative is working to enhance the law school experience by helping students establish wellness practices which can lead to greater academic and professional success.",link:"https://www.miamimindfulness.org/"},{name:"Wellness Week (Indiana University)",desc:"A semesterly effort to participate in a larger cultural movement toward well-being in the legal field.",link:"https://mckinneylaw.iu.edu/news/releases/2021/08/iu-mckinney-kicks-off-academic-year-with-wellness-week-.html"}]},{name:"Overwhelming Anxiety",interventions:[{name:"Mindfully Move Mondays (Penn State)",desc:"Weekly programming hosted by the Academic & Student Services Office to  support and encourage wellness. Past programs include yoga, art projects, snacks, walks, guest speakers, and more.",link:"https://www.aals.org/wp-content/uploads/sites/12/2023/02/Penn-State-Dickinson-Law-Mental-Health-Resources.pdf"}]},{name:"School/Life Imbalance",interventions:[{name:"Maintaining WellBeing as a Lawyer (Mississippi Christian University)",desc:"Discussing overall best practices for Lawyers or all humans in transition.",link:"https://canva.link/ojm9fgzumlxv9pf"}]},{name:"Financial Stress",interventions:[{name:"Finances and Mental Health (University of Texas)",desc:"An informational presentation on the impacts of financial stress in law school.",link:"Email Dr. Timm for presentation materials: Maria.Timm@austin.utexas.edu"}]}],[{name:"Cold Call Stress",interventions:[]},{name:"Comparison Traps",interventions:[]}],[{name:"Professional Identity Questioning",interventions:[{name:"First-Generation Support Group (Boston University)",desc:"A student affinity group dedicated to supporting students who are the first in their family to graduate from college or attend professional school, offering mentorship, community building, and professional development",link:"https://lawdocket.bu.edu/fgp/home/"}]},{name:"Career Pressures",interventions:[]}],[{name:"Performance Anxiety",interventions:[]},{name:"Conflict with Others",interventions:[]}],[{name:"Performance Anxiety",interventions:[{name:"“Stress Free Zones” (CUNY Law)",desc:"During midterms and finals, these zones have snacks and hot drinks, puzzles/games,  creative spaces, and more. For finals, we host hot brunches and dinners for day and evening students.",link:"https://www.aals.org/wp-content/uploads/sites/12/2023/02/CUNY-Law-Mental-Health-Resources.pdf"}]},{name:"Managing Disappointment",interventions:[]}],[{name:"Social Anxiety",interventions:[]},{name:"Substance Use Concerns",interventions:[]}],[{name:"Intolerance of Uncertainty",interventions:[]},{name:"Imposter Syndrome",interventions:[]},{name:"Procrastination",interventions:[]},{name:"Perfectionism",interventions:[]}],[{name:"Professional Identity Questioning",interventions:[{name:"First-Generation Support Group (Boston University)",desc:"A student affinity group dedicated to supporting students who are the first in their family to graduate from college or attend professional school, offering mentorship, community building, and professional development",link:"https://lawdocket.bu.edu/fgp/home/"},{name:"Boundaries for Sustainability in the High Pressure Workplace (University of Washington)",desc:"How to manage stress and set boundaries in high-pressure jobsincluding the brain science of stress, myths about productivity, time-blocking and prioritization tools, scripts for saying no, and tactics for handling difficult people and imposter syndrome.",link:"Email Phil Lentz for more information: plentz@uw.edu"}]}],[{name:"Isolation",interventions:[{name:"Friendsgiving (Roger Williams University)",desc:"Thanksgiving feast that provides a place of acceptance and belonging for LGBTQ+ law students who are not able to go home for the holiday.",link:"https://law.rwu.edu/student-life/stories/empower-and-amplify-lgbtq-voices"}]},{name:"Financial Stress",interventions:[{name:"“Counselor’s Corner” (University of South Carolina)",desc:"Counselor’s Corner provides our students with access to food items/textbooks/clothing/hygienic products that they can take home to lessen the financial burden law students experience.",link:"https://secure.touchnet.net/C21544_ustores/web/product_detail.jsp?PRODUCTID=6733"}]},{name:"Familial Pressures",interventions:[]}],[{name:"Social and Identity Related Stress",interventions:[]},{name:"Managing Disappointment",interventions:[]},{name:"Overcommitted",interventions:[]}],[{name:"Performance Anxiety",interventions:[{name:"“Stress Free Zones” (CUNY Law)",desc:"During midterms and finals, these zones have snacks and hot drinks, puzzles/games,  creative spaces, and more. For finals, we host hot brunches and dinners for day and evening students.",link:"https://www.aals.org/wp-content/uploads/sites/12/2023/02/CUNY-Law-Mental-Health-Resources.pdf"},{name:"Peace Under Pressure (Mississippi Christian University)",desc:"Time Management and Exam Preparation from a Holistic Space.",link:"https://canva.link/elneatn4d7pi4b5"},{name:"Comfort K9 (University of Maryland)",desc:"A therapy dog visits students experiencing exam stress.",link:"https://www.aals.org/wp-content/uploads/sites/12/2023/03/Maryland-Carey-Law-Mental-Health-Resources.pdf"}]},{name:"Overwhelming Anxiety",interventions:[{name:"“Exam Breaks” (Washington and Lee University)",desc:"The Law Library hosts informal social activities each semester.",link:"https://libguides.wlu.edu/law/1Lorientation/events"}]},{name:"Irregular Sleep and/or Diet",interventions:[{name:"“Counselor’s Corner” (University of South Carolina)",desc:"Counselor’s Corner provides our students with access to food items/textbooks/clothing/hygienic products that they can take home to lessen the financial burden law students experience.",link:"https://secure.touchnet.net/C21544_ustores/web/product_detail.jsp?PRODUCTID=6733"}]},{name:"Anticipatory Anxiety",interventions:[{name:"Community Care Fair (UC Irvine)",desc:"Annual event in the Law Courtyard, allowing students to connect with both campus and community resources to support their academic and personal well-being.",link:"https://www.law.uci.edu/campus-life/slate/issues/2025/2025-01-24.html"}]}],[{name:"Overwhelming Anxiety",interventions:[{name:"Building You: Emotional Resilience Group (Boston University)",desc:"A specialized, skills-based support group designed to help law students cope with the unique stressors of law school.",link:"https://www.aals.org/wp-content/uploads/sites/12/2023/02/Boston-University-Law-Mental-Health-Resources.pdf"},{name:"Productivity Lab (University of Washington)",desc:"Learn and hone research-backed skills during weekly meetings over the course of 5 weeks, integrating study skills with therapeutic interventions.",link:"Email Phil Lentz for more information: plentz@uw.edu"}]},{name:"Financial Stress",interventions:[{name:"“Counselor’s Corner” (University of South Carolina)",desc:"Counselor’s Corner provides our students with access to food items/textbooks/clothing/hygienic products that they can take home to lessen the financial burden law students experience.",link:"https://secure.touchnet.net/C21544_ustores/web/product_detail.jsp?PRODUCTID=6733"}]},{name:"Substance Use Concerns",interventions:[{name:"Annual Mocktail Competition (American University)",desc:"Mocktail competition is intended to support students who may struggle with mental health or substance abuse issues.",link:"https://www.dcbar.org/news-events/publications/d-c-bar-blog/zero-proof-fun-au%E2%80%99s-annual-mocktail-competition-dr"}]}],[{name:"Intolerance of Uncertainty",interventions:[]},{name:"Catastrophizing",interventions:[]}],[{name:"Professional Identity Questioning",interventions:[]}],[{name:"Social and Identity Related Stress",interventions:[]},{name:"Conflict with Others",interventions:[]},{name:"Social Anxiety",interventions:[]}],[{name:"Anticipatory Anxiety",interventions:[{name:"The Insightful Mind Initiative (University of Miami)",desc:"The Insightful Mind Initiative is working to enhance the law school experience by helping students establish wellness practices which can lead to greater academic and professional success.",link:"https://www.miamimindfulness.org/"}]},{name:"Social and Identity Related Stress",interventions:[]}],[{name:"Substance Use Concerns",interventions:[{name:"MN Law Recovery Group (University of Minnesota)",desc:"Bi-weekly student-run support group for students with substance abuse   concerns, recently expanded to friends/family of those with substance abuse concerns.",link:"https://www.aals.org/wp-content/uploads/sites/12/2022/12/Minnesota-Law-Wellbeing-Resources.pdf"}]}],[{name:"School/Life Imbalance",interventions:[{name:"Maintaining WellBeing as a Lawyer (Mississippi Christian University)",desc:"Discussing overall best practices for Lawyers or all humans in transition.",link:"https://canva.link/ojm9fgzumlxv9pf"}]},{name:"Financial Stress",interventions:[{name:"“Counselor’s Corner” (University of South Carolina)",desc:"Counselor’s Corner provides our students with access to food items/textbooks/clothing/hygienic products that they can take home to lessen the financial burden law students experience.",link:"https://secure.touchnet.net/C21544_ustores/web/product_detail.jsp?PRODUCTID=6733"},{name:"Finances and Mental Health (University of Texas)",desc:"An informational presentation on the impacts of financial stress in law school.",link:"Email Dr. Timm for presentation materials: Maria.Timm@austin.utexas.edu"}]},{name:"Boundary Setting",interventions:[{name:"Wellness in Practice: Lessons from Top Lawyers & Law Firm Leaders about Why Mental Health Matters and Tips for Thriving in Practice (Fordham)",desc:"A mental health and professional development initiative featuring panel discussions, workshops, and speaker series designed to help law students and legal professionals navigate high-stress environments, prevent burnout, and build lifelong self-care habits.",link:"https://www.fordham.edu/school-of-law/life-at-fordham-law/office-of-professionalism/fordham-law-wellness/"}]}]];
+data["1L Year"]=year1Events.map((label,i)=>({label,symptoms:year1Data[i]&&year1Data[i].length?year1Data[i].map(s=>({name:s.name,interventions:s.interventions.length?s.interventions:[{name:"Intervention TBD",desc:"No description provided",link:"No link available"}]})):makeSymptoms()}));
+const year2Events=["August","OCI","Join RSO","Fellowships","Class Content","Apply for Journal","Moot Court","Bar Review Night","Job Applications","Apply for Clinic","Thanksgiving","Finals","Winter Holidays","Waiting for Grades","Register for Classes","Summer Job"];
+const year2Data=[[{name:"Somatic Dysregulation",interventions:[{name:"“10-Minute Mind” (CUNY Law)",desc:"10 Minute Mindfulness Meditation Course to start out every day right!",link:"https://www.instagram.com/p/DMtL8YSB5oq/"}]},{name:"Financial Stress",interventions:[{name:"“Counselor’s Corner” (University of South Carolina)",desc:"Counselor’s Corner provides our students with access to food items/textbooks/clothing/hygienic products that they can take home to lessen the financial burden law students experience.",link:"https://secure.touchnet.net/C21544_ustores/web/product_detail.jsp?PRODUCTID=6733"},{name:"Finances and Mental Health (University of Texas)",desc:"An informational presentation on the impacts of financial stress in law school.",link:"Email Dr. Timm for presentation materials: Maria.Timm@austin.utexas.edu"}]},{name:"Anticipatory Anxiety",interventions:[{name:"DiveIN + Be Well Week (Drexel University)",desc:"A week to explore different aspects of wellness, including emotional, physical/safety, social, financial, spiritual, occupational, and intellectual well-being. Programming also includes therapy dogs, massage therapy, primal scream therapy, meditation, improv comedy, and more.",link:"https://www.aals.org/wp-content/uploads/sites/12/2023/02/Drexel-Law-Mental-Health-Resources.pdf"},{name:"Wellness Week (Indiana University)",desc:"A semesterly effort to participate in a larger cultural movement toward well-being in the legal field.",link:"https://mckinneylaw.iu.edu/news/releases/2021/08/iu-mckinney-kicks-off-academic-year-with-wellness-week-.html"},{name:"Motion to Thrive (University of Texas)",desc:"A presentation on bar prep stress: its sources, strategies for managing symptoms, and resources available.",link:"Email Dr. Timm for presentation materials: Maria.Timm@austin.utexas.edu"}]}],[{name:"Professional Identity Questioning",interventions:[{name:"First-Generation Support Group (Boston University)",desc:"A student affinity group dedicated to supporting students who are the first in their family to graduate from college or attend professional school, offering mentorship, community building, and professional development",link:"https://lawdocket.bu.edu/fgp/home/"}]}],[{name:"Social and Identity Related Stress",interventions:[]},{name:"Overcommitted",interventions:[]}],[{name:"Overcommitted",interventions:[]}],[{name:"Somatic Dysregulation",interventions:[]},{name:"Avoidance",interventions:[]},{name:"Trauma Response",interventions:[]}],[{name:"Social and Identity Related Stress",interventions:[]},{name:"Managing Disappointment",interventions:[]},{name:"Overcommitted",interventions:[]}],[{name:"Performance Anxiety",interventions:[]},{name:"Social and Identity Related Stress",interventions:[]},{name:"Conflict with Others",interventions:[]}],[{name:"Substance Use Concerns",interventions:[]}],[{name:"Professional Identity Questioning",interventions:[{name:"First-Generation Support Group (Boston University)",desc:"A student affinity group dedicated to supporting students who are the first in their family to graduate from college or attend professional school, offering mentorship, community building, and professional development",link:"https://lawdocket.bu.edu/fgp/home/"},{name:"Boundaries for Sustainability in the High Pressure Workplace (University of Washington)",desc:"How to manage stress and set boundaries in high-pressure jobsincluding the brain science of stress, myths about productivity, time-blocking and prioritization tools, scripts for saying no, and tactics for handling difficult people and imposter syndrome.",link:"Email Phil Lentz for more information: plentz@uw.edu"}]}],[{name:"Professional Identity Questioning",interventions:[]},{name:"Overcommitted",interventions:[]},{name:"Trauma Response",interventions:[]}],[{name:"Financial Stress",interventions:[{name:"“Counselor’s Corner” (University of South Carolina)",desc:"Counselor’s Corner provides our students with access to food items/textbooks/clothing/hygienic products that they can take home to lessen the financial burden law students experience.",link:"https://secure.touchnet.net/C21544_ustores/web/product_detail.jsp?PRODUCTID=6733"}]},{name:"Isolation",interventions:[{name:"Friendsgiving (Roger Williams University)",desc:"Thanksgiving feast that provides a place of acceptance and belonging for LGBTQ+ law students who are not able to go home for the holiday.",link:"https://law.rwu.edu/student-life/stories/empower-and-amplify-lgbtq-voices"}]},{name:"Familial Pressures",interventions:[]}],[{name:"Overwhelming Anxiety",interventions:[{name:"“Exam Breaks” (Washington and Lee University)",desc:"The Law Library hosts informal social activities each semester.",link:"https://libguides.wlu.edu/law/1Lorientation/events"}]},{name:"Performance Anxiety",interventions:[{name:"Peace Under Pressure (Mississippi Christian University)",desc:"Time Management and Exam Preparation from a Holistic Space.",link:"https://canva.link/elneatn4d7pi4b5"},{name:"“Stress Free Zones” (CUNY Law)",desc:"During midterms and finals, these zones have snacks and hot drinks, puzzles/games,  creative spaces, and more. For finals, we host hot brunches and dinners for day and evening students.",link:"https://www.aals.org/wp-content/uploads/sites/12/2023/02/CUNY-Law-Mental-Health-Resources.pdf"},{name:"Comfort K9 (University of Maryland)",desc:"A therapy dog visits students experiencing exam stress.",link:"https://www.aals.org/wp-content/uploads/sites/12/2023/03/Maryland-Carey-Law-Mental-Health-Resources.pdf"}]},{name:"Anticipatory Anxiety",interventions:[{name:"Community Care Fair (UC Irvine)",desc:"Annual event in the Law Courtyard, allowing students to connect with both campus and community resources to support their academic and personal well-being.",link:"https://www.law.uci.edu/campus-life/slate/issues/2025/2025-01-24.html"}]},{name:"Irregular Sleep and/or Diet",interventions:[{name:"“Counselor’s Corner” (University of South Carolina)",desc:"Counselor’s Corner provides our students with access to food items/textbooks/clothing/hygienic products that they can take home to lessen the financial burden law students experience.",link:"https://secure.touchnet.net/C21544_ustores/web/product_detail.jsp?PRODUCTID=6733"}]}],[{name:"Financial Stress",interventions:[{name:"“Counselor’s Corner” (University of South Carolina)",desc:"Counselor’s Corner provides our students with access to food items/textbooks/clothing/hygienic products that they can take home to lessen the financial burden law students experience.",link:"https://secure.touchnet.net/C21544_ustores/web/product_detail.jsp?PRODUCTID=6733"}]},{name:"Substance Use Concerns",interventions:[{name:"Annual Mocktail Competition (American University)",desc:"Mocktail competition is intended to support students who may struggle with mental health or substance abuse issues.",link:"https://www.dcbar.org/news-events/publications/d-c-bar-blog/zero-proof-fun-au%E2%80%99s-annual-mocktail-competition-dr"}]},{name:"Overwhelming Anxiety",interventions:[{name:"Productivity Lab (University of Washington)",desc:"Learn and hone research-backed skills during weekly meetings over the course of 5 weeks, integrating study skills with therapeutic interventions.",link:"No link available"},{name:"Building You: Emotional Resilience Group (Boston University)",desc:"A specialized, skills-based support group designed to help law students cope with the unique stressors of law school.",link:"https://www.aals.org/wp-content/uploads/sites/12/2023/02/Boston-University-Law-Mental-Health-Resources.pdf"}]}],[{name:"Catastrophizing",interventions:[]},{name:"Intolerance of Uncertainty",interventions:[]}],[{name:"Anticipatory Anxiety",interventions:[{name:"The Insightful Mind Initiative (University of Miami)",desc:"The Insightful Mind Initiative is working to enhance the law school experience by helping students establish wellness practices which can lead to greater academic and professional success.",link:"https://www.miamimindfulness.org/"}]}],[{name:"Financial Stress",interventions:[{name:"“Counselor’s Corner” (University of South Carolina)",desc:"Counselor’s Corner provides our students with access to food items/textbooks/clothing/hygienic products that they can take home to lessen the financial burden law students experience.",link:"https://secure.touchnet.net/C21544_ustores/web/product_detail.jsp?PRODUCTID=6733"},{name:"Finances and Mental Health (University of Texas)",desc:"An informational presentation on the impacts of financial stress in law school.",link:"Email Dr. Timm for presentation materials: Maria.Timm@austin.utexas.edu"}]},{name:"Boundary Setting",interventions:[{name:"Wellness in Practice: Lessons from Top Lawyers & Law Firm Leaders about Why Mental Health Matters and Tips for Thriving in Practice (Fordham)",desc:"A mental health and professional development initiative featuring panel discussions, workshops, and speaker series designed to help law students and legal professionals navigate high-stress environments, prevent burnout, and build lifelong self-care habits.",link:"https://www.fordham.edu/school-of-law/life-at-fordham-law/office-of-professionalism/fordham-law-wellness/"}]},{name:"School/Life Imbalance",interventions:[{name:"Maintaining WellBeing as a Lawyer (Mississippi Christian University)",desc:"Discussing overall best practices for Lawyers or all humans in transition.",link:"https://canva.link/ojm9fgzumlxv9pf"}]}]];
+data["2L Year"]=year2Events.map((label,i)=>({label,symptoms:year2Data[i]&&year2Data[i].length?year2Data[i].map(s=>({name:s.name,interventions:s.interventions.length?s.interventions:[{name:"Intervention TBD",desc:"No description provided",link:"No link available"}]})):makeSymptoms()}));
+const year3Events=["August","Moot Court","Finals","Winter Holiday","Job Applications","SBA Elections","Bar Prep","Graduation","July"];
+const year3Data=[[{name:"Somatic Dysregulation",interventions:[{name:"“10-Minute Mind” (CUNY Law)",desc:"10 Minute Mindfulness Meditation Course to start out every day right!",link:"https://www.instagram.com/p/DMtL8YSB5oq/"}]},{name:"Anticipatory Anxiety",interventions:[{name:"DiveIN + Be Well Week (Drexel University)",desc:"A week to explore different aspects of wellness, including emotional, physical/safety, social, financial, spiritual, occupational, and intellectual well-being. Programming also includes therapy dogs, massage therapy, primal scream therapy, meditation, improv comedy, and more.",link:"https://www.aals.org/wp-content/uploads/sites/12/2023/02/Drexel-Law-Mental-Health-Resources.pdf"},{name:"Wellness Week (Indiana University)",desc:"A semesterly effort to participate in a larger cultural movement toward well-being in the legal field.",link:"https://mckinneylaw.iu.edu/news/releases/2021/08/iu-mckinney-kicks-off-academic-year-with-wellness-week-.html"},{name:"Motion to Thrive (University of Texas)",desc:"A presentation on bar prep stress: its sources, strategies for managing symptoms, and resources available.",link:"Email Dr. Timm for presentation materials: Maria.Timm@austin.utexas.edu"}]}],[{name:"Conflict with Others",interventions:[]},{name:"Overcommitted",interventions:[]}],[{name:"Performance Anxiety",interventions:[{name:"“Stress Free Zones” (CUNY Law)",desc:"During midterms and finals, these zones have snacks and hot drinks, puzzles/games,  creative spaces, and more. For finals, we host hot brunches and dinners for day and evening students.",link:"https://www.aals.org/wp-content/uploads/sites/12/2023/02/CUNY-Law-Mental-Health-Resources.pdf"},{name:"Peace Under Pressure (Mississippi Christian University)",desc:"Time Management and Exam Preparation from a Holistic Space.",link:"https://canva.link/elneatn4d7pi4b5"},{name:"Comfort K9 (University of Maryland)",desc:"A therapy dog visits students experiencing exam stress.",link:"https://www.aals.org/wp-content/uploads/sites/12/2023/03/Maryland-Carey-Law-Mental-Health-Resources.pdf"}]},{name:"Substance Use Concerns",interventions:[{name:"Annual Mocktail Competition (American University)",desc:"Mocktail competition is intended to support students who may struggle with mental health or substance abuse issues.",link:"https://www.dcbar.org/news-events/publications/d-c-bar-blog/zero-proof-fun-au%E2%80%99s-annual-mocktail-competition-dr"}]}],[{name:"Anticipatory Anxiety",interventions:[{name:"Community Care Fair (UC Irvine)",desc:"Annual event in the Law Courtyard, allowing students to connect with both campus and community resources to support their academic and personal well-being.",link:"https://www.law.uci.edu/campus-life/slate/issues/2025/2025-01-24.html"}]},{name:"Overwhelming Anxiety",interventions:[{name:"Productivity Lab (University of Washington)",desc:"Learn and hone research-backed skills during weekly meetings over the course of 5 weeks, integrating study skills with therapeutic interventions.",link:"Email Phil Lentz for more information: plentz@uw.edu"}]}],[{name:"Intolerance of Uncertainty",interventions:[{name:"Building You: Emotional Resilience Group (Boston University)",desc:"A specialized, skills-based support group designed to help law students cope with the unique stressors of law school.",link:"https://www.aals.org/wp-content/uploads/sites/12/2023/02/Boston-University-Law-Mental-Health-Resources.pdf"}]},{name:"Professional Identity Questioning",interventions:[{name:"First-Generation Support Group (Boston University)",desc:"A student affinity group dedicated to supporting students who are the first in their family to graduate from college or attend professional school, offering mentorship, community building, and professional development",link:"https://lawdocket.bu.edu/fgp/home/"},{name:"Boundaries for Sustainability in the High Pressure Workplace (University of Washington)",desc:"How to manage stress and set boundaries in high-pressure jobsincluding the brain science of stress, myths about productivity, time-blocking and prioritization tools, scripts for saying no, and tactics for handling difficult people and imposter syndrome.",link:"Email Phil Lentz for more information: plentz@uw.edu"}]}],[{name:"Overcommitted",interventions:[]},{name:"Conflict with Others",interventions:[]},{name:"Reduced Motivation",interventions:[]}],[{name:"Professional Identity Questioning",interventions:[{name:"Character & Fitness Training (Cardozo Law)",desc:"What is Character and Fitness",link:"https://larc.cardozo.yu.edu/cgi/viewcontent.cgi?article=1140&context=flyers-2025-2026"}]},{name:"Performance Anxiety",interventions:[{name:"Peace Under Pressure (Mississippi Christian University)",desc:"Time Management and Exam Preparation from a Holistic Space.",link:"https://canva.link/elneatn4d7pi4b5"},{name:"Summer Wellness Programming for Bar Exam (Penn State)",desc:"A Supplemental Bar  Preparation Program for recent graduates, including regular wellness activities.",link:"https://www.aals.org/wp-content/uploads/sites/12/2023/02/Penn-State-Dickinson-Law-Mental-Health-Resources.pdf"},{name:"Bar Prep Tips (University of Texas)",desc:"A presentation on bar prep stress: its sources, strategies for managing symptoms, and resources available.",link:"Email Dr. Timm for presentation materials: Maria.Timm@austin.utexas.edu"},{name:"Stressed to Success (University of Washington)",desc:"Managing your stress within the Bar Prep process to maintain effectiveness and performance for the exam.",link:"Email Phil Lentz for more information: plentz@uw.edu"}]}],[{name:"Social Shifts",interventions:[]},{name:"Career Pressures",interventions:[]},{name:"Familial Pressures",interventions:[]},{name:"Financial Stress",interventions:[{name:"Finances and Mental Health (University of Texas)",desc:"An informational presentation on the impacts of financial stress in law school.",link:"Email Dr. Timm for presentation materials: Maria.Timm@austin.utexas.edu"}]},{name:"Imposter Syndrome",interventions:[]},{name:"Maturational Loss",interventions:[]}],[]];
+data["3L Year"]=year3Events.map((label,i)=>({label,symptoms:year3Data[i]&&year3Data[i].length?year3Data[i].map(s=>({name:s.name,interventions:s.interventions.length?s.interventions:[{name:"Intervention TBD",desc:"No description provided",link:"No link available"}]})):makeSymptoms()}));
+  return data;
+}
+
+const excelSymptomMap={"Anticipatory Anxiety":[{name:"“Secrets to Success: Growth Mindset and Resilience” (Fordham University)",desc:"A mandatory wellness workshop for first-year students at Fordham Law designed to build resilience and manage legal education pressures.",link:"https://www.fordham.edu/school-of-law/life-at-fordham-law/office-of-professionalism/fordham-law-wellness/"},{name:"Wellness 101: Strategies for Maintaining Health and Happiness in Law School and Practice  (Fordham University)",desc:"Interactive presentation designed to introduce students to the broad array of mental health and wellness resources available to them as Fordham Law students, and teach them practical strategies they can use to manage stress and cultivate resilience and well-being throughout law school and law practice",link:"https://www.fordham.edu/school-of-law/life-at-fordham-law/office-of-professionalism/1l-professionalism-curriculum/"},{name:"“The Mindfulness Room” (DePaul University)",desc:"A quiet space for the College of Law community to use when anyone needs a moment to sit in quiet, meditate, pray, reflect, or otherwise have a peaceful and restorative movement away from the stress of law school.",link:"https://law.depaul.edu/student-resources/student-affairs/wellness"},{name:"Community Care Fair (UC Irvine)",desc:"Annual event in the Law Courtyard, allowing students to connect with both campus and community resources to support their academic and personal well-being.",link:"https://www.law.uci.edu/campus-life/slate/issues/2025/2025-01-24.html"},{name:"DiveIN + Be Well Week (Drexel University)",desc:"A week to explore different aspects of wellness, including emotional, physical/safety, social, financial, spiritual, occupational, and intellectual well-being. Programming also includes therapy dogs, massage therapy, primal scream therapy, meditation, improv comedy, and more.",link:"https://www.aals.org/wp-content/uploads/sites/12/2023/02/Drexel-Law-Mental-Health-Resources.pdf"},{name:"The Insightful Mind Initiative (University of Miami)",desc:"The Insightful Mind Initiative is working to enhance the law school experience by helping students establish wellness practices which can lead to greater academic and professional success.",link:"https://www.miamimindfulness.org/"},{name:"Mental Health Collective (University of Miami)",desc:"A supportive, judgment-free community where students can talk openly about stress, pressure, and everything in between.",link:"https://student.law.miami.edu/student-life/student-organizations/mental-health-collective/"},{name:"Wellness Week (Indiana University)",desc:"A semesterly effort to participate in a larger cultural movement toward well-being in the legal field.",link:"https://mckinneylaw.iu.edu/news/releases/2021/08/iu-mckinney-kicks-off-academic-year-with-wellness-week-.html"},{name:"Motion to Thrive (University of Texas)",desc:"A presentation on bar prep stress: its sources, strategies for managing symptoms, and resources available.",link:"Email Dr. Timm for presentation materials: Maria.Timm@austin.utexas.edu"}],"Catastrophizing":[{name:"Productivity Lab (University of Washington)",desc:"Learn and hone research-backed skills during weekly meetings over the course of 5 weeks, integrating study skills with therapeutic interventions.",link:"Email Phil Lentz for more information: plentz@uw.edu"}],"Cold Call Stress":[{name:"Motion to Thrive (University of Texas)",desc:"A presentation on bar prep stress: its sources, strategies for managing symptoms, and resources available.",link:"Email Dr. Timm for presentation materials: Maria.Timm@austin.utexas.edu"}],"Overwhelming Anxiety":[{name:"“Exam Breaks” (Washington and Lee University)",desc:"The Law Library hosts informal social activities each semester.",link:"https://libguides.wlu.edu/law/1Lorientation/events"},{name:"Building You: Emotional Resilience Group (Boston University)",desc:"A specialized, skills-based support group designed to help law students cope with the unique stressors of law school.",link:"https://www.aals.org/wp-content/uploads/sites/12/2023/02/Boston-University-Law-Mental-Health-Resources.pdf"},{name:"Mindfully Move Mondays (Penn State)",desc:"Weekly programming hosted by the Academic & Student Services Office to  support and encourage wellness. Past programs include yoga, art projects, snacks, walks, guest speakers, and more.",link:"https://www.aals.org/wp-content/uploads/sites/12/2023/02/Penn-State-Dickinson-Law-Mental-Health-Resources.pdf"},{name:"Productivity Lab (University of Washington)",desc:"Learn and hone research-backed skills during weekly meetings over the course of 5 weeks, integrating study skills with therapeutic interventions.",link:"Email Phil Lentz for more information: plentz@uw.edu"}],"Performance Anxiety":[{name:"Productivity Lab (University of Washington)",desc:"Learn and hone research-backed skills during weekly meetings over the course of 5 weeks, integrating study skills with therapeutic interventions.",link:"Email Phil Lentz for more information: plentz@uw.edu"},{name:"Peace Under Pressure (Mississippi Christian University)",desc:"Time Management and Exam Preparation from a Holistic Space.",link:"https://canva.link/elneatn4d7pi4b5"},{name:"Summer Wellness Programming for Bar Exam (Penn State)",desc:"A Supplemental Bar  Preparation Program for recent graduates, including regular wellness activities.",link:"https://www.aals.org/wp-content/uploads/sites/12/2023/02/Penn-State-Dickinson-Law-Mental-Health-Resources.pdf"},{name:"“Stress Free Zones” (CUNY Law)",desc:"During midterms and finals, these zones have snacks and hot drinks, puzzles/games,  creative spaces, and more. For finals, we host hot brunches and dinners for day and evening students.",link:"https://www.aals.org/wp-content/uploads/sites/12/2023/02/CUNY-Law-Mental-Health-Resources.pdf"},{name:"Comfort K9 (University of Maryland)",desc:"A therapy dog visits students experiencing exam stress.",link:"https://www.aals.org/wp-content/uploads/sites/12/2023/03/Maryland-Carey-Law-Mental-Health-Resources.pdf"},{name:"Mindfully Move Mondays (Penn State)",desc:"Weekly programming hosted by the Academic & Student Services Office to  support and encourage wellness. Past programs include yoga, art projects, snacks, walks, guest speakers, and more.",link:"https://www.aals.org/wp-content/uploads/sites/12/2023/02/Penn-State-Dickinson-Law-Mental-Health-Resources.pdf"}],"Social Anxiety":[{name:"“Exam Breaks” (Washington and Lee University)",desc:"The Law Library hosts informal social activities each semester.",link:"https://libguides.wlu.edu/law/1Lorientation/events"},{name:"Mindfully Move Mondays (Penn State)",desc:"Weekly programming hosted by the Academic & Student Services Office to  support and encourage wellness. Past programs include yoga, art projects, snacks, walks, guest speakers, and more.",link:"https://www.aals.org/wp-content/uploads/sites/12/2023/02/Penn-State-Dickinson-Law-Mental-Health-Resources.pdf"},{name:"Motion to Thrive (University of Texas)",desc:"A presentation on bar prep stress: its sources, strategies for managing symptoms, and resources available.",link:"Email Dr. Timm for presentation materials: Maria.Timm@austin.utexas.edu"}],"Trauma Response":[],"Somatic Dysregulation":[{name:"Motion to Thrive (University of Texas)",desc:"A presentation on bar prep stress: its sources, strategies for managing symptoms, and resources available.",link:"Email Dr. Timm for presentation materials: Maria.Timm@austin.utexas.edu"},{name:"“10-Minute Mind” (CUNY Law)",desc:"10 Minute Mindfulness Meditation Course to start out every day right!",link:"https://www.instagram.com/p/DMtL8YSB5oq/"}],"Comparison Traps":[{name:"Productivity Lab (University of Washington)",desc:"Learn and hone research-backed skills during weekly meetings over the course of 5 weeks, integrating study skills with therapeutic interventions.",link:"Email Phil Lentz for more information: plentz@uw.edu"}],"Imposter Syndrome":[{name:"Motion to Thrive (University of Texas)",desc:"A presentation on bar prep stress: its sources, strategies for managing symptoms, and resources available.",link:"Email Dr. Timm for presentation materials: Maria.Timm@austin.utexas.edu"},{name:"Boundaries for Sustainability in the High Pressure Workplace (University of Washington)",desc:"How to manage stress and set boundaries in high-pressure jobsincluding the brain science of stress, myths about productivity, time-blocking and prioritization tools, scripts for saying no, and tactics for handling difficult people and imposter syndrome.",link:"Email Phil Lentz for more information: plentz@uw.edu"}],"Professional Identity Questioning":[{name:"Boundaries for Sustainability in the High Pressure Workplace (University of Washington)",desc:"How to manage stress and set boundaries in high-pressure jobsincluding the brain science of stress, myths about productivity, time-blocking and prioritization tools, scripts for saying no, and tactics for handling difficult people and imposter syndrome.",link:"Email Phil Lentz for more information: plentz@uw.edu"},{name:"First-Generation Support Group (Boston University)",desc:"A student affinity group dedicated to supporting students who are the first in their family to graduate from college or attend professional school, offering mentorship, community building, and professional development",link:"https://lawdocket.bu.edu/fgp/home/"},{name:"“Secrets to Success: Growth Mindset and Resilience” (Fordham University)",desc:"A mandatory wellness workshop for first-year students at Fordham Law designed to build resilience and manage legal education pressures.",link:"https://www.fordham.edu/school-of-law/life-at-fordham-law/office-of-professionalism/fordham-law-wellness/"},{name:"Character & Fitness Training (Cardozo Law)",desc:"What is Character and Fitness",link:"https://larc.cardozo.yu.edu/cgi/viewcontent.cgi?article=1140&context=flyers-2025-2026"}],"Managing Disappointment":[],"Self Doubt":[],"Social and Identity Related Stress":[{name:"Motion to Thrive (University of Texas)",desc:"A presentation on bar prep stress: its sources, strategies for managing symptoms, and resources available.",link:"Email Dr. Timm for presentation materials: Maria.Timm@austin.utexas.edu"}],"Existential Dread":[],"Hopelessness":[],"Reduced Motivation":[{name:"Productivity Lab (University of Washington)",desc:"Learn and hone research-backed skills during weekly meetings over the course of 5 weeks, integrating study skills with therapeutic interventions.",link:"Email Phil Lentz for more information: plentz@uw.edu"}],"Analysis Paralysis":[{name:"Productivity Lab (University of Washington)",desc:"Learn and hone research-backed skills during weekly meetings over the course of 5 weeks, integrating study skills with therapeutic interventions.",link:"Email Phil Lentz for more information: plentz@uw.edu"}],"Decision Fatigue":[{name:"Productivity Lab (University of Washington)",desc:"Learn and hone research-backed skills during weekly meetings over the course of 5 weeks, integrating study skills with therapeutic interventions.",link:"Email Phil Lentz for more information: plentz@uw.edu"}],"Distractibility":[{name:"Productivity Lab (University of Washington)",desc:"Learn and hone research-backed skills during weekly meetings over the course of 5 weeks, integrating study skills with therapeutic interventions.",link:"Email Phil Lentz for more information: plentz@uw.edu"},{name:"Motion to Thrive (University of Texas)",desc:"A presentation on bar prep stress: its sources, strategies for managing symptoms, and resources available.",link:"Email Dr. Timm for presentation materials: Maria.Timm@austin.utexas.edu"}],"Overcommitted":[{name:"Productivity Lab (University of Washington)",desc:"Learn and hone research-backed skills during weekly meetings over the course of 5 weeks, integrating study skills with therapeutic interventions.",link:"Email Phil Lentz for more information: plentz@uw.edu"}],"Perfectionism":[{name:"Productivity Lab (University of Washington)",desc:"Learn and hone research-backed skills during weekly meetings over the course of 5 weeks, integrating study skills with therapeutic interventions.",link:"Email Phil Lentz for more information: plentz@uw.edu"}],"Poor Time Management":[{name:"Boundaries for Sustainability in the High Pressure Workplace (University of Washington)",desc:"How to manage stress and set boundaries in high-pressure jobsincluding the brain science of stress, myths about productivity, time-blocking and prioritization tools, scripts for saying no, and tactics for handling difficult people and imposter syndrome.",link:"Email Phil Lentz for more information: plentz@uw.edu"},{name:"Productivity Lab (University of Washington)",desc:"Learn and hone research-backed skills during weekly meetings over the course of 5 weeks, integrating study skills with therapeutic interventions.",link:"Email Phil Lentz for more information: plentz@uw.edu"}],"Procrastination":[{name:"Productivity Lab (University of Washington)",desc:"Learn and hone research-backed skills during weekly meetings over the course of 5 weeks, integrating study skills with therapeutic interventions.",link:"Email Phil Lentz for more information: plentz@uw.edu"}],"Avoidance":[],"Conflict with Others":[{name:"Boundaries for Sustainability in the High Pressure Workplace (University of Washington)",desc:"How to manage stress and set boundaries in high-pressure jobsincluding the brain science of stress, myths about productivity, time-blocking and prioritization tools, scripts for saying no, and tactics for handling difficult people and imposter syndrome.",link:"Email Phil Lentz for more information: plentz@uw.edu"}],"Isolation":[{name:"Friendsgiving (Roger Williams University)",desc:"Thanksgiving feast that provides a place of acceptance and belonging for LGBTQ+ law students who are not able to go home for the holiday.",link:"https://law.rwu.edu/student-life/stories/empower-and-amplify-lgbtq-voices"},{name:"Motion to Thrive (University of Texas)",desc:"A presentation on bar prep stress: its sources, strategies for managing symptoms, and resources available.",link:"Email Dr. Timm for presentation materials: Maria.Timm@austin.utexas.edu"}],"Loneliness":[{name:"Friendsgiving (Roger Williams University)",desc:"Thanksgiving feast that provides a place of acceptance and belonging for LGBTQ+ law students who are not able to go home for the holiday.",link:"https://law.rwu.edu/student-life/stories/empower-and-amplify-lgbtq-voices"}],"Social Shifts":[],"Career Pressures":[{name:"Wellness in Practice: Lessons from Top Lawyers & Law Firm Leaders about Why Mental Health Matters and Tips for Thriving in Practice (Fordham)",desc:"A mental health and professional development initiative featuring panel discussions, workshops, and speaker series designed to help law students and legal professionals navigate high-stress environments, prevent burnout, and build lifelong self-care habits.",link:"https://www.fordham.edu/school-of-law/life-at-fordham-law/office-of-professionalism/fordham-law-wellness/"},{name:"Boundaries for Sustainability in the High Pressure Workplace (University of Washington)",desc:"How to manage stress and set boundaries in high-pressure jobsincluding the brain science of stress, myths about productivity, time-blocking and prioritization tools, scripts for saying no, and tactics for handling difficult people and imposter syndrome.",link:"Email Phil Lentz for more information: plentz@uw.edu"}],"Familial Pressures":[{name:"Friendsgiving (Roger Williams University)",desc:"Thanksgiving feast that provides a place of acceptance and belonging for LGBTQ+ law students who are not able to go home for the holiday.",link:"https://law.rwu.edu/student-life/stories/empower-and-amplify-lgbtq-voices"}],"Financial Stress":[{name:"“Counselor’s Corner” (University of South Carolina)",desc:"Counselor’s Corner provides our students with access to food items/textbooks/clothing/hygienic products that they can take home to lessen the financial burden law students experience.",link:"https://secure.touchnet.net/C21544_ustores/web/product_detail.jsp?PRODUCTID=6733"},{name:"Finances and Mental Health (University of Texas)",desc:"An informational presentation on the impacts of financial stress in law school.",link:"Email Dr. Timm for presentation materials: Maria.Timm@austin.utexas.edu"}],"Political Stress":[],"Maturational Loss":[],"Sudden Loss/Grief":[],"Intolerance of Uncertainty":[{name:"Building You: Emotional Resilience Group (Boston University)",desc:"A specialized, skills-based support group designed to help law students cope with the unique stressors of law school.",link:"https://www.aals.org/wp-content/uploads/sites/12/2023/02/Boston-University-Law-Mental-Health-Resources.pdf"},{name:"Motion to Thrive (University of Texas)",desc:"A presentation on bar prep stress: its sources, strategies for managing symptoms, and resources available.",link:"Email Dr. Timm for presentation materials: Maria.Timm@austin.utexas.edu"}],"Irregular Sleep and/or Diet":[{name:"“Counselor’s Corner” (University of South Carolina)",desc:"Counselor’s Corner provides our students with access to food items/textbooks/clothing/hygienic products that they can take home to lessen the financial burden law students experience.",link:"https://secure.touchnet.net/C21544_ustores/web/product_detail.jsp?PRODUCTID=6733"}],"Boundary Setting":[{name:"Boundaries for Sustainability in the High Pressure Workplace (University of Washington)",desc:"How to manage stress and set boundaries in high-pressure jobsincluding the brain science of stress, myths about productivity, time-blocking and prioritization tools, scripts for saying no, and tactics for handling difficult people and imposter syndrome.",link:"Email Phil Lentz for more information: plentz@uw.edu"},{name:"Wellness in Practice: Lessons from Top Lawyers & Law Firm Leaders about Why Mental Health Matters and Tips for Thriving in Practice (Fordham)",desc:"A mental health and professional development initiative featuring panel discussions, workshops, and speaker series designed to help law students and legal professionals navigate high-stress environments, prevent burnout, and build lifelong self-care habits.",link:"https://www.fordham.edu/school-of-law/life-at-fordham-law/office-of-professionalism/fordham-law-wellness/"},{name:"Motion to Thrive (University of Texas)",desc:"A presentation on bar prep stress: its sources, strategies for managing symptoms, and resources available.",link:"Email Dr. Timm for presentation materials: Maria.Timm@austin.utexas.edu"},{name:"Mental Health Collective (University of Miami)",desc:"A supportive, judgment-free community where students can talk openly about stress, pressure, and everything in between.",link:"https://student.law.miami.edu/student-life/student-organizations/mental-health-collective/"}],"School/Life Imbalance":[{name:"Wellness 101: Strategies for Maintaining Health and Happiness in Law School and Practice  (Fordham University)",desc:"Interactive presentation designed to introduce students to the broad array of mental health and wellness resources available to them as Fordham Law students, and teach them practical strategies they can use to manage stress and cultivate resilience and well-being throughout law school and law practice",link:"https://www.fordham.edu/school-of-law/life-at-fordham-law/office-of-professionalism/1l-professionalism-curriculum/"},{name:"Mental Health Collective (University of Miami)",desc:"A supportive, judgment-free community where students can talk openly about stress, pressure, and everything in between.",link:"https://student.law.miami.edu/student-life/student-organizations/mental-health-collective/"},{name:"Mindfully Move Mondays (Penn State)",desc:"Weekly programming hosted by the Academic & Student Services Office to  support and encourage wellness. Past programs include yoga, art projects, snacks, walks, guest speakers, and more.",link:"https://www.aals.org/wp-content/uploads/sites/12/2023/02/Penn-State-Dickinson-Law-Mental-Health-Resources.pdf"},{name:"Maintaining WellBeing as a Lawyer (Mississippi Christian University)",desc:"Discussing overall best practices for Lawyers or all humans in transition.",link:"https://canva.link/ojm9fgzumlxv9pf"}],"Substance Use Concerns":[{name:"Annual Mocktail Competition (American University)",desc:"Mocktail competition is intended to support students who may struggle with mental health or substance abuse issues.",link:"https://www.dcbar.org/news-events/publications/d-c-bar-blog/zero-proof-fun-au%E2%80%99s-annual-mocktail-competition-dr"},{name:"MN Law Recovery Group (University of Minnesota)",desc:"Bi-weekly student-run support group for students with substance abuse   concerns, recently expanded to friends/family of those with substance abuse concerns.",link:"https://www.aals.org/wp-content/uploads/sites/12/2022/12/Minnesota-Law-Wellbeing-Resources.pdf"}],"Panic Response":[{name:"Motion to Thrive (University of Texas)",desc:"A presentation on bar prep stress: its sources, strategies for managing symptoms, and resources available.",link:"Email Dr. Timm for presentation materials: Maria.Timm@austin.utexas.edu"}]};
+
+const data = buildData();
+const tabsEl = document.getElementById('yearTabs');
+const panelsEl = document.getElementById('yearPanels');
+
+function closeAllCards() {
+  document.querySelectorAll('.event-dot').forEach(d => d.classList.remove('open'));
+  document.querySelectorAll('.event-card').forEach(c => c.classList.remove('open'));
+}
+
+Object.keys(data).forEach((yr, yi) => {
+  const tab = document.createElement('button');
+  tab.className = 'year-tab' + (yi === 0 ? ' active' : '');
+  tab.textContent = yr;
+  tab.onclick = () => {
+    document.querySelectorAll('.year-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.year-panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('panel-' + yi).classList.add('active');
+    closeAllCards();
+    document.getElementById('timelineHint').style.display = 'block';
+    document.getElementById('colorLegend').style.display = 'flex';
+  };
+  tabsEl.appendChild(tab);
+
+  const panel = document.createElement('div');
+  panel.className = 'year-panel' + (yi === 0 ? ' active' : '');
+  panel.id = 'panel-' + yi;
+
+  const timeline = document.createElement('div');
+  timeline.className = 'timeline';
+
+  data[yr].forEach((ev) => {
+    const color = getColor(ev.label);
+    const row = document.createElement('div');
+    row.className = 'event-row';
+
+    const dot = document.createElement('div');
+    dot.className = 'event-dot';
+    dot.style.borderColor = color;
+    dot.style.background = color;
+    dot.style.setProperty('--dot-color', color);
+    dot.setAttribute('role', 'button');
+    dot.setAttribute('tabindex', '0');
+
+    const body = document.createElement('div');
+    body.className = 'event-body';
+
+    const lbl = document.createElement('div');
+    lbl.className = 'event-label';
+    lbl.textContent = ev.label;
+
+    const card = document.createElement('div');
+    card.className = 'event-card';
+    card.style.borderTop = '3px solid ' + color;
+
+    const cardHeader = document.createElement('div');
+    cardHeader.className = 'card-header';
+    const cardTitle = document.createElement('div');
+    cardTitle.className = 'card-title';
+    cardTitle.textContent = ev.label;
+    const closeBtn = document.createElement('button');
+    closeBtn.className = 'close-btn';
+    closeBtn.innerHTML = '&times;';
+    closeBtn.onclick = e => { e.stopPropagation(); closeAllCards(); };
+    cardHeader.appendChild(cardTitle);
+    cardHeader.appendChild(closeBtn);
+    card.appendChild(cardHeader);
+
+    const sympHeader = document.createElement('div');
+    sympHeader.className = 'symptoms-label';
+    sympHeader.textContent = 'Associated symptoms';
+    card.appendChild(sympHeader);
+
+    ev.symptoms.forEach(symp => {
+      const srow = document.createElement('div');
+      srow.className = 'symptom-row';
+
+      const trigger = document.createElement('div');
+      trigger.className = 'symptom-trigger';
+      trigger.setAttribute('role', 'button');
+      trigger.setAttribute('tabindex', '0');
+
+      const sdot = document.createElement('div');
+      sdot.className = 'symp-dot';
+      sdot.style.borderColor = color;
+      const sname = document.createElement('div');
+      sname.className = 'symp-name';
+      sname.textContent = symp.name;
+      trigger.appendChild(sdot);
+      trigger.appendChild(sname);
+
+      const intBox = document.createElement('div');
+      intBox.className = 'interventions';
+      intBox.style.borderLeftColor = color;
+
+      const intHeader = document.createElement('div');
+      intHeader.className = 'int-label-header';
+      intHeader.style.color = color;
+      intHeader.textContent = 'Programming';
+      intBox.appendChild(intHeader);
+
+      symp.interventions.forEach(intv => {
+        const irow = document.createElement('div');
+        irow.className = 'intervention-row';
+        const itrigger = document.createElement('div');
+        itrigger.style.cssText = 'display:flex;align-items:flex-start;gap:6px;cursor:pointer;padding:3px 4px;border-radius:4px;transition:background 0.12s;';
+        itrigger.setAttribute('role','button');
+        itrigger.setAttribute('tabindex','0');
+        const idot = document.createElement('div');
+        idot.className = 'int-dot';
+        idot.style.background = color;
+        idot.style.marginTop = '5px';
+        idot.style.flexShrink = '0';
+        const ilbl = document.createElement('div');
+        ilbl.className = 'int-label';
+        ilbl.textContent = typeof intv === 'object' ? intv.name : intv;
+        itrigger.appendChild(idot);
+        itrigger.appendChild(ilbl);
+
+        const detailBox = document.createElement('div');
+        detailBox.className = 'int-detail';
+        detailBox.style.cssText = 'display:none;margin:4px 0 4px 16px;padding:8px 10px;background:var(--warm-white);border-radius:6px;border:1px solid var(--border-light);';
+        const descEl = document.createElement('div');
+        descEl.style.cssText = 'font-size:0.72rem;color:var(--text-mid);line-height:1.5;margin-bottom:6px;';
+        descEl.textContent = (typeof intv === 'object' && intv.desc) ? intv.desc : 'No description provided';
+        const linkEl = document.createElement('div');
+        linkEl.style.cssText = 'font-size:0.72rem;';
+        const linkVal = (typeof intv === 'object' && intv.link) ? intv.link : 'No link available';
+        if (linkVal !== 'No link available' && linkVal.startsWith('http')) {
+          const a = document.createElement('a');
+          a.href = linkVal; a.target = '_blank'; a.rel = 'noopener noreferrer';
+          a.style.cssText = 'color:var(--primary);text-decoration:underline;';
+          a.textContent = 'Visit link →';
+          linkEl.appendChild(a);
+        } else {
+          linkEl.style.color = 'var(--text-light)';
+          linkEl.style.fontStyle = 'italic';
+          linkEl.textContent = linkVal;
+        }
+        detailBox.appendChild(descEl);
+        detailBox.appendChild(linkEl);
+
+        const toggleDetail = e => {
+          e.stopPropagation();
+          const wasOpen = detailBox.style.display === 'block';
+          intBox.querySelectorAll('.int-detail').forEach(d => d.style.display = 'none');
+          intBox.querySelectorAll('.int-trigger-active').forEach(t => { t.style.background = ''; t.classList.remove('int-trigger-active'); });
+          if (!wasOpen) { detailBox.style.display = 'block'; itrigger.style.background = 'var(--teal-pale)'; itrigger.classList.add('int-trigger-active'); }
+        };
+        itrigger.addEventListener('click', toggleDetail);
+        itrigger.addEventListener('keydown', e => { if (e.key==='Enter'||e.key===' ') toggleDetail(e); });
+        itrigger.addEventListener('mouseenter', () => { if (detailBox.style.display!=='block') itrigger.style.background='var(--teal-pale)'; });
+        itrigger.addEventListener('mouseleave', () => { if (detailBox.style.display!=='block') itrigger.style.background=''; });
+
+        irow.appendChild(itrigger);
+        irow.appendChild(detailBox);
+        intBox.appendChild(irow);
+      });
+
+      const toggleSymp = e => {
+        e.stopPropagation();
+        const wasOpen = trigger.classList.contains('open');
+        card.querySelectorAll('.symptom-trigger').forEach(t => t.classList.remove('open'));
+        card.querySelectorAll('.interventions').forEach(b => b.classList.remove('open'));
+        if (!wasOpen) { trigger.classList.add('open'); intBox.classList.add('open'); }
+      };
+      trigger.addEventListener('click', toggleSymp);
+      trigger.addEventListener('keydown', e => { if (e.key==='Enter'||e.key===' ') toggleSymp(e); });
+
+      srow.appendChild(trigger);
+      srow.appendChild(intBox);
+      card.appendChild(srow);
+    });
+
+    const toggleCard = e => {
+      e.stopPropagation();
+      const wasOpen = dot.classList.contains('open');
+      closeAllCards();
+      if (!wasOpen) { dot.classList.add('open','visited'); card.classList.add('open'); }
+    };
+    dot.addEventListener('click', toggleCard);
+    dot.addEventListener('keydown', e => { if (e.key==='Enter'||e.key===' ') toggleCard(e); });
+    lbl.addEventListener('click', toggleCard);
+
+    body.appendChild(lbl);
+    body.appendChild(card);
+    row.appendChild(dot);
+    row.appendChild(body);
+    timeline.appendChild(row);
+  });
+
+  panel.appendChild(timeline);
+  panelsEl.appendChild(panel);
+});
+
+document.addEventListener('click', closeAllCards);
+
+// ── Search by Symptom tab ─────────────────────────────────────────
+(function buildSymptomIndex() {
+  const symptomMap = {};
+  Object.values(data).forEach(events => {
+    events.forEach(ev => {
+      ev.symptoms.forEach(symp => {
+        if (!symptomMap[symp.name]) symptomMap[symp.name] = new Map();
+        symp.interventions.forEach(intv => {
+          const key = typeof intv === 'object' ? intv.name : intv;
+          if (key && key !== 'Intervention TBD' && !symptomMap[symp.name].has(key)) {
+            symptomMap[symp.name].set(key, typeof intv === 'object' ? intv : {name:key,desc:'No description provided',link:'No link available'});
+          }
+        });
+      });
+    });
+  });
+
+  // Merge excelSymptomMap
+  Object.entries(excelSymptomMap).forEach(([sname, intervs]) => {
+    if (!symptomMap[sname]) symptomMap[sname] = new Map();
+    intervs.forEach(iv => { if (!symptomMap[sname].has(iv.name)) symptomMap[sname].set(iv.name, iv); });
+  });
+
+  const CATEGORIES = [
+    { name: 'Anxiety & Stress Response', color: '#A4426D', symptoms: ['Anticipatory Anxiety','Catastrophizing','Cold Call Stress','Overwhelming Anxiety','Performance Anxiety','Social Anxiety','Somatic Dysregulation','Trauma Response'] },
+    { name: 'Identity & Self-Worth', color: '#1A6F9E', symptoms: ['Comparison Traps','Imposter Syndrome','Managing Disappointment','Professional Identity Questioning','Rejection Sensitivity','Self Doubt','Social and Identity Related Stress'] },
+    { name: 'Motivation & Mood', color: '#D4A017', symptoms: ['Existential Dread','Hopelessness','Maturational Loss','Reduced Motivation'] },
+    { name: 'Executive Function & Productivity', color: '#006B4E', symptoms: ['Analysis Paralysis','Decision Fatigue','Distractibility','Overcommitted','Perfectionism','Poor Time Management','Procrastination'] },
+    { name: 'Withdrawal & Connection', color: '#4A4580', symptoms: ['Avoidance','Conflict with Others','Isolation','Loneliness','Social Shifts'] },
+    { name: 'External Pressures', color: '#708238', symptoms: ['Career Pressures','Familial Pressures','Financial Stress','Political Stress'] },
+    { name: 'Coping & Self-Regulation', color: '#8F3D00', symptoms: ['Boundary Setting','Intolerance of Uncertainty','Irregular Sleep and/or Diet','Panic Response','School/Life Imbalance','Substance Use Concerns'] }
+  ];
+
+  const tab = document.createElement('button');
+  tab.className = 'year-tab';
+  tab.textContent = 'Search by Symptom';
+  tab.onclick = () => {
+    document.querySelectorAll('.year-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.year-panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    panel.classList.add('active');
+    closeAllCards();
+    document.getElementById('timelineHint').style.display = 'none';
+    document.getElementById('colorLegend').style.display = 'none';
+  };
+  tabsEl.appendChild(tab);
+
+  const panel = document.createElement('div');
+  panel.className = 'year-panel';
+  panel.id = 'panel-symptom';
+
+  const intro = document.createElement('p');
+  intro.className = 'timeline-hint';
+  intro.textContent = 'Select a theme to explore its symptoms, then select a symptom to reveal associated programming.';
+  panel.appendChild(intro);
+
+  const timeline = document.createElement('div');
+  timeline.className = 'timeline';
+
+  CATEGORIES.forEach(cat => {
+    const row = document.createElement('div');
+    row.className = 'event-row';
+
+    const dot = document.createElement('div');
+    dot.className = 'event-dot';
+    dot.style.borderColor = cat.color;
+    dot.setAttribute('role', 'button');
+    dot.setAttribute('tabindex', '0');
+
+    const body = document.createElement('div');
+    body.className = 'event-body';
+
+    const lbl = document.createElement('div');
+    lbl.className = 'event-label';
+    lbl.textContent = cat.name;
+    lbl.style.color = cat.color;
+    lbl.style.fontWeight = '500';
+
+    const card = document.createElement('div');
+    card.className = 'event-card';
+    card.style.borderTop = '3px solid ' + cat.color;
+
+    const cardHeader = document.createElement('div');
+    cardHeader.className = 'card-header';
+    const cardTitle = document.createElement('div');
+    cardTitle.className = 'card-title';
+    cardTitle.textContent = cat.name;
+    cardTitle.style.color = cat.color;
+    const closeBtn = document.createElement('button');
+    closeBtn.className = 'close-btn';
+    closeBtn.innerHTML = '&times;';
+    closeBtn.onclick = e => { e.stopPropagation(); closeAllCards(); };
+    cardHeader.appendChild(cardTitle);
+    cardHeader.appendChild(closeBtn);
+    card.appendChild(cardHeader);
+
+    const sympHeader = document.createElement('div');
+    sympHeader.className = 'symptoms-label';
+    sympHeader.textContent = 'Symptoms in this theme';
+    card.appendChild(sympHeader);
+
+    cat.symptoms.forEach(symptomName => {
+      const interventions = symptomMap[symptomName] ? Array.from(symptomMap[symptomName].values()) : [];
+      const srow = document.createElement('div');
+      srow.className = 'symptom-row';
+      const trigger = document.createElement('div');
+      trigger.className = 'symptom-trigger';
+      trigger.setAttribute('role', 'button');
+      trigger.setAttribute('tabindex', '0');
+      const sdot = document.createElement('div');
+      sdot.className = 'symp-dot';
+      sdot.style.borderColor = cat.color;
+      const sname = document.createElement('div');
+      sname.className = 'symp-name';
+      sname.textContent = symptomName;
+      trigger.appendChild(sdot);
+      trigger.appendChild(sname);
+
+      const intBox = document.createElement('div');
+      intBox.className = 'interventions';
+      intBox.style.borderLeftColor = cat.color;
+      const intHeader = document.createElement('div');
+      intHeader.className = 'int-label-header';
+      intHeader.style.color = cat.color;
+      intHeader.textContent = 'Programming';
+      intBox.appendChild(intHeader);
+
+      if (interventions.length === 0) {
+        const irow = document.createElement('div');
+        irow.className = 'intervention-row';
+        const ilbl = document.createElement('div');
+        ilbl.className = 'int-label';
+        ilbl.style.fontStyle = 'italic';
+        ilbl.textContent = 'No programming listed yet';
+        irow.appendChild(ilbl);
+        intBox.appendChild(irow);
+      } else {
+        interventions.forEach(intv => {
+          const irow = document.createElement('div');
+          irow.className = 'intervention-row';
+          const itrigger = document.createElement('div');
+          itrigger.style.cssText = 'display:flex;align-items:flex-start;gap:6px;cursor:pointer;padding:3px 4px;border-radius:4px;transition:background 0.12s;';
+          itrigger.setAttribute('role','button');
+          itrigger.setAttribute('tabindex','0');
+          const idot = document.createElement('div');
+          idot.className = 'int-dot';
+          idot.style.background = cat.color;
+          idot.style.marginTop = '5px';
+          idot.style.flexShrink = '0';
+          const ilbl = document.createElement('div');
+          ilbl.className = 'int-label';
+          ilbl.textContent = typeof intv === 'object' ? intv.name : intv;
+          itrigger.appendChild(idot);
+          itrigger.appendChild(ilbl);
+
+          const detailBox = document.createElement('div');
+          detailBox.className = 'int-detail';
+          detailBox.style.cssText = 'display:none;margin:4px 0 4px 16px;padding:8px 10px;background:var(--warm-white);border-radius:6px;border:1px solid var(--border-light);';
+          const descEl = document.createElement('div');
+          descEl.style.cssText = 'font-size:0.72rem;color:var(--text-mid);line-height:1.5;margin-bottom:6px;';
+          descEl.textContent = (typeof intv === 'object' && intv.desc) ? intv.desc : 'No description provided';
+          const linkEl = document.createElement('div');
+          linkEl.style.cssText = 'font-size:0.72rem;';
+          const linkVal = (typeof intv === 'object' && intv.link) ? intv.link : 'No link available';
+          if (linkVal !== 'No link available' && linkVal.startsWith('http')) {
+            const a = document.createElement('a');
+            a.href = linkVal; a.target = '_blank'; a.rel = 'noopener noreferrer';
+            a.style.cssText = 'color:var(--primary);text-decoration:underline;';
+            a.textContent = 'Visit link →';
+            linkEl.appendChild(a);
+          } else {
+            linkEl.style.color = 'var(--text-light)';
+            linkEl.style.fontStyle = 'italic';
+            linkEl.textContent = linkVal;
+          }
+          detailBox.appendChild(descEl);
+          detailBox.appendChild(linkEl);
+
+          const toggleDetail = e => {
+            e.stopPropagation();
+            const wasOpen = detailBox.style.display === 'block';
+            intBox.querySelectorAll('.int-detail').forEach(d => d.style.display = 'none');
+            intBox.querySelectorAll('.int-trigger-active').forEach(t => { t.style.background=''; t.classList.remove('int-trigger-active'); });
+            if (!wasOpen) { detailBox.style.display='block'; itrigger.style.background='var(--teal-pale)'; itrigger.classList.add('int-trigger-active'); }
+          };
+          itrigger.addEventListener('click', toggleDetail);
+          itrigger.addEventListener('keydown', e => { if(e.key==='Enter'||e.key===' ') toggleDetail(e); });
+          itrigger.addEventListener('mouseenter', () => { if(detailBox.style.display!=='block') itrigger.style.background='var(--teal-pale)'; });
+          itrigger.addEventListener('mouseleave', () => { if(detailBox.style.display!=='block') itrigger.style.background=''; });
+
+          irow.appendChild(itrigger);
+          irow.appendChild(detailBox);
+          intBox.appendChild(irow);
+        });
+      }
+
+      const toggleSymp = e => {
+        e.stopPropagation();
+        const wasOpen = trigger.classList.contains('open');
+        card.querySelectorAll('.symptom-trigger').forEach(t => t.classList.remove('open'));
+        card.querySelectorAll('.interventions').forEach(b => b.classList.remove('open'));
+        if (!wasOpen) { trigger.classList.add('open'); intBox.classList.add('open'); }
+      };
+      trigger.addEventListener('click', toggleSymp);
+      trigger.addEventListener('keydown', e => { if(e.key==='Enter'||e.key===' ') toggleSymp(e); });
+
+      srow.appendChild(trigger);
+      srow.appendChild(intBox);
+      card.appendChild(srow);
+    });
+
+    const toggleCard = e => {
+      e.stopPropagation();
+      const wasOpen = dot.classList.contains('open');
+      closeAllCards();
+      if (!wasOpen) { dot.classList.add('open','visited'); card.classList.add('open'); }
+    };
+    dot.addEventListener('click', toggleCard);
+    dot.addEventListener('keydown', e => { if(e.key==='Enter'||e.key===' ') toggleCard(e); });
+    lbl.addEventListener('click', toggleCard);
+
+    body.appendChild(lbl);
+    body.appendChild(card);
+    row.appendChild(dot);
+    row.appendChild(body);
+    timeline.appendChild(row);
+  });
+
+  panel.appendChild(timeline);
+  panelsEl.appendChild(panel);
+})();
+
+</script>
+</body>
+</html>
